@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>علامتي | Mon Brand - المتجر الجزائري</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&family=Reem+Kufi:wght@600;700&display=swap">
+<style>
+:root{--bg:#090d0b;--card:rgba(255,255,255,.05);--tx:#f5f2ea;--mu:#9ba79f;--gd:#d9b65c;--gr:#006233;--rd:#d21034;--bd:rgba(255,255,255,.1)}
+body{background:var(--bg);color:var(--tx);font-family:Cairo,sans-serif;margin:0;padding:0;line-height:1.6}
+header{background:rgba(9,13,11,.9);padding:15px 20px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--bd);position:sticky;top:0;z-index:10}
+header h1{font-family:"Reem Kufi",sans-serif;color:var(--gd);margin:0;font-size:1.5rem}
+.hero{text-align:center;padding:50px 20px;background:linear-gradient(135deg,#090d0b,#111a14)}
+.hero h2{font-size:2rem;color:var(--gd);margin-bottom:10px;font-family:"Reem Kufi",sans-serif}
+.container{max-width:1000px;margin:auto;padding:20px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:20px;text-align:center;transition:.3s}
+.card:hover{border-color:var(--gd);transform:translateY(-5px)}
+.price{color:var(--gd);font-weight:800;font-size:1.2rem;margin:10px 0}
+.btn{background:linear-gradient(90deg,#d9b65c,#f2d98c);color:#241c06;border:0;padding:12px 24px;font-weight:800;border-radius:10px;cursor:pointer;width:100%;font-family:inherit}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;place-items:center;padding:20px;z-index:100}
+.modal.active{display:grid}
+.modal-box{background:#111814;border:1px solid var(--bd);border-radius:20px;padding:25px;width:100%;max-width:400px;position:relative}
+.form-group{margin-bottom:12px}
+.form-group label{display:block;margin-bottom:5px;font-size:.9rem;color:var(--mu)}
+.form-control{width:100%;background:rgba(255,255,255,.05);border:1px solid var(--bd);border-radius:8px;padding:10px;color:var(--tx);font-family:inherit;box-sizing:border-box}
+.close-btn{position:absolute;left:20px;top:15px;background:none;border:0;color:var(--mu);font-size:1.5rem;cursor:pointer}
+.whatsapp-float{position:fixed;bottom:20px;left:20px;background:#25d366;color:#fff;width:55px;height:55px;border-radius:50%;display:grid;place-items:center;font-size:1.8rem;box-shadow:0 5px 20px rgba(37,211,102,.4);z-index:50;text-decoration:none}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>علامتي .dz</h1>
+  <span style="color:var(--gd);font-size:0.9rem;">🇩🇿 الدفع عند الاستلام</span>
+</header>
+
+<div class="hero">
+  <h2>أزياء مطرّزة ومطبوعة بلمسة جزائرية</h2>
+  <p>توصيل لباب بيتك لـ 69 ولاية · الدفع عند استلام طلبك</p>
+</div>
+
+<div class="container">
+  <h3 style="text-align:center;color:var(--gd);margin-bottom:30px;font-family:'Reem Kufi',sans-serif;">المنتجات الأكثر طلباً</h3>
+  
+  <div class="grid">
+    <!-- منتج 1 -->
+    <div class="card">
+      <h3 style="margin-top:0">عباية دبي</h3>
+      <p style="color:var(--mu);font-size:0.9rem">تصميم فاخر وأنيق</p>
+      <div class="price">6,000 دج</div>
+      <button class="btn" onclick="openModal('عباية دبي - 6000 دج')">اطلب الآن 🛒</button>
+    </div>
+
+    <!-- منتج 2 -->
+    <div class="card">
+      <h3 style="margin-top:0">كراكو تقليدي</h3>
+      <p style="color:var(--mu);font-size:0.9rem">طرز عالي الجودة</p>
+      <div class="price">12,000 دج</div>
+      <button class="btn" onclick="openModal('كراكو - 12000 دج')">اطلب الآن 🛒</button>
+    </div>
+
+    <!-- منتج 3 -->
+    <div class="card">
+      <h3 style="margin-top:0">تريكو أوفرسايز</h3>
+      <p style="color:var(--mu);font-size:0.9rem">طباعة حرارية متينة</p>
+      <div class="price">1,600 دج</div>
+      <button class="btn" onclick="openModal('تريكو أوفرسايز - 1600 دج')">اطلب الآن 🛒</button>
+    </div>
+
+    <!-- منتج 4 -->
+    <div class="card">
+      <h3 style="margin-top:0">بولو كلاسيك</h3>
+      <p style="color:var(--mu);font-size:0.9rem">مريح وعملي</p>
+      <div class="price">1,800 دج</div>
+      <button class="btn" onclick="openModal('بولو - 1800 دج')">اطلب الآن 🛒</button>
+    </div>
+  </div>
+</div>
+
+<!-- نافذة الطلب -->
+<div class="modal" id="orderModal">
+  <div class="modal-box">
+    <button class="close-btn" onclick="closeModal()">×</button>
+    <h3 style="color:var(--gd);margin-top:0">إتمام الطلب</h3>
+    <p id="prodName" style="font-weight:bold;color:var(--tx);margin-top:0"></p>
+    <form onsubmit="sendWhatsApp(event)">
+      <div class="form-group">
+        <label>الاسم الكامل:</label>
+        <input type="text" id="name" class="form-control" required placeholder="أمين جزائري">
+      </div>
+      <div class="form-group">
+        <label>رقم الهاتف:</label>
+        <input type="tel" id="phone" class="form-control" required placeholder="06xxxxxxxx">
+      </div>
+      <div class="form-group">
+        <label>الولاية:</label>
+        <select id="wilaya" class="form-control" required>
+          <option value="">اختر ولايتك...</option>
+          <option value="02 - الشلف">02 - الشلف</option>
+          <option value="16 - الجزائر العاصمة">16 - الجزائر العاصمة</option>
+          <option value="31 - وهران">31 - وهران</option>
+          <option value="25 - قسنطينة">25 - قسنطينة</option>
+          <option value="ولاية أخرى">ولاية أخرى</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>العنوان بالتفصيل:</label>
+        <input type="text" id="address" class="form-control" required placeholder="البلدية، الحي...">
+      </div>
+      <button type="submit" class="btn" style="margin-top:10px">تأكيد الطلب عبر واتساب 🛒</button>
+    </form>
+  </div>
+</div>
+
+<a href="https://wa.me/213600000000" class="whatsapp-float" target="_blank">💬</a>
+
+<script>
+var selectedProduct = "";
+function openModal(product) {
+  selectedProduct = product;
+  document.getElementById("prodName").innerText = "المنتج: " + product;
+  document.getElementById("orderModal").classList.add("active");
+}
+function closeModal() {
+  document.getElementById("orderModal").classList.remove("active");
+}
+function sendWhatsApp(e) {
+  e.preventDefault();
+  var name = document.getElementById("name").value;
+  var phone = document.getElementById("phone").value;
+  var wilaya = document.getElementById("wilaya").value;
+  var address = document.getElementById("address").value;
+  
+  var phoneNum = "213600000000"; // استبدله برقم واتساب الخاص بك
+  var text = "السلام عليكم، أريد طلب هذا المنتج:%0A" +
+             "🛍 *المنتج:* " + encodeURIComponent(selectedProduct) + "%0A" +
+             "👤 *الاسم:* " + encodeURIComponent(name) + "%0A" +
+             "📞 *الهاتف:* " + encodeURIComponent(phone) + "%0A" +
+             "📍 *الولاية:* " + encodeURIComponent(wilaya) + "%0A" +
+             "🏠 *العنوان:* " + encodeURIComponent(address) + "%0A" +
+             "💵 *الدفع:* عند الاستلام";
+             
+  window.open("https://wa.me/" + phoneNum + "?text=" + text, "_blank");
+  closeModal();
+}
+</script>
+
+</body>
+</html>
