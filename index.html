@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>السوق الجزائري الحر | Souq DZ</title>
+    <title id="pageTitle">السوق الجزائري الحر | Souq DZ</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script> tailwind.config = { darkMode: 'class' } </script>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
@@ -15,19 +15,22 @@
 </head>
 <body class="min-h-screen flex flex-col justify-between bg-amber-50/40 dark:bg-[#0b0f19] text-gray-900 dark:text-gray-100 transition-colors duration-300">
 
-    <!-- الشريط العلوي بروح السوق الجزائري -->
-    <div class="bg-gradient-to-r from-amber-600 via-orange-600 to-emerald-700 text-white text-xs font-bold py-2.5 px-4 text-center shadow-md flex justify-between items-center px-6">
-        <span>🇩🇿 مرحبا بيك في السوق العصري الحار! توصيل لـ 58 ولاية مع ZR Express | الدفع بعد ما تستلم سلعتك</span>
-        <button onclick="openAdminPanel()" class="bg-black/30 hover:bg-black/50 px-3 py-1 rounded-lg text-[11px] transition">⚙️ لوحة البائع</button>
+    <!-- الشريط العلوي -->
+    <div class="bg-gradient-to-r from-amber-600 via-orange-600 to-emerald-700 text-white text-xs font-bold py-2.5 px-4 shadow-md flex flex-wrap justify-between items-center gap-2 px-6">
+        <span id="topBarText">🇩🇿 مرحبا بيك في السوق العصري الحار! توصيل لـ 58 ولاية مع ZR Express | الدفع بعد ما تستلم سلعتك</span>
+        <div class="flex items-center gap-2">
+            <button onclick="toggleLanguage()" id="langToggleBtn" class="bg-white/20 hover:bg-white/30 text-white px-3 py-1 rounded-lg text-[11px] transition font-bold">FR / عربية</button>
+            <button onclick="openAdminLoginModal()" id="adminBtn" class="bg-black/30 hover:bg-black/50 px-3 py-1 rounded-lg text-[11px] transition">⚙️ لوحة البائع</button>
+        </div>
     </div>
 
     <!-- الناب بار -->
     <header class="sticky top-0 z-45 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 shadow-sm">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <span class="text-2xl font-black bg-gradient-to-r from-amber-500 to-emerald-500 bg-clip-text text-transparent">سوق DZ 🛒</span>
+            <span id="storeBrand" class="text-2xl font-black bg-gradient-to-r from-amber-500 to-emerald-500 bg-clip-text text-transparent">سوق DZ 🛒</span>
             <div class="flex items-center gap-3">
                 <button onclick="toggleCartDrawer()" class="relative p-2.5 rounded-xl bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:scale-105 transition shadow-sm flex items-center gap-1.5 font-bold text-xs">
-                    🛒 سلتك <span id="cartBadge" class="bg-emerald-500 text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-bold">0</span>
+                    <span id="cartBtnText">🛒 سلتك</span> <span id="cartBadge" class="bg-emerald-500 text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-bold">0</span>
                 </button>
                 <button onclick="toggleTheme()" class="p-2.5 rounded-xl bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:scale-105 transition shadow-sm"><span id="themeIcon">☀️</span></button>
             </div>
@@ -36,21 +39,21 @@
 
     <main class="max-w-7xl mx-auto px-6 py-8 flex-grow space-y-10">
         
-        <!-- واجهة المقدمة: بوت الذكاء الاصطناعي بروح جزائرية -->
+        <!-- واجهة المقدمة -->
         <div class="text-center space-y-6 py-12 px-6 bg-gradient-to-b from-white to-amber-50/50 dark:from-gray-900 dark:to-gray-950 rounded-3xl border border-amber-500/20 shadow-2xl fade-in">
             <div class="w-20 h-20 mx-auto bg-gradient-to-tr from-amber-500 to-emerald-500 rounded-2xl flex items-center justify-center text-4xl shadow-lg shadow-amber-500/20 animate-bounce">
                 🤖
             </div>
             <div class="space-y-2">
-                <span class="text-xs font-bold text-amber-600 dark:text-amber-400 bg-amber-100 dark:bg-amber-950/80 border border-amber-500/30 px-4 py-1.5 rounded-full inline-block">مساعد السوق الذكي 💬</span>
-                <h1 class="text-2xl md:text-4xl font-black tracking-tight">"أهلا بيك يا خويا، راك فالسوق الأضمن والأسرع!"</h1>
-                <p id="botMessage" class="text-gray-600 dark:text-gray-400 text-sm max-w-xl mx-auto leading-relaxed">
-                    أنا المساعد الذكي تاعك هنا. اضغط على أي منتج باش تشوف التعريف تاعه، أو ابدأ التسوق مباشرة!
+                <span id="aiBadge" class="text-xs font-bold text-amber-600 dark:text-amber-400 bg-amber-100 dark:bg-amber-950/80 border border-amber-500/30 px-4 py-1.5 rounded-full inline-block">مساعد السوق الذكي 💬</span>
+                <h1 id="heroTitle" class="text-2xl md:text-4xl font-black tracking-tight">"أهلا بيك يا خويا، راك فالسوق الأضمن والأسرع!"</h1>
+                <p id="heroDesc" class="text-gray-600 dark:text-gray-400 text-sm max-w-xl mx-auto leading-relaxed">
+                    أنا المساعد الذكي تاعك هنا. اضغط على أي منتج باش تشوف التعريف والكمية المتبقية بدقة!
                 </p>
             </div>
 
             <div class="pt-4">
-                <a href="#marketSection" onclick="scrollToMarket()" class="inline-block bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-base font-black px-8 py-4 rounded-2xl shadow-xl shadow-emerald-600/30 transition transform hover:scale-105">
+                <a href="#marketSection" id="shopNowBtn" onclick="scrollToMarket()" class="inline-block bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-base font-black px-8 py-4 rounded-2xl shadow-xl shadow-emerald-600/30 transition transform hover:scale-105">
                     ✨ تسوق الآن يا خويا
                 </a>
             </div>
@@ -59,7 +62,7 @@
         <!-- قسم السوق والمنتجات -->
         <div id="marketSection" class="space-y-6 pt-6">
             <div class="flex flex-col md:flex-row justify-between items-center gap-4 bg-white dark:bg-gray-900 p-6 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-sm">
-                <h2 class="text-2xl font-black flex items-center gap-2">🛍️ حانوت السلع والعروض</h2>
+                <h2 id="marketTitle" class="text-2xl font-black flex items-center gap-2">🛍️ حانوت السلع والعروض</h2>
                 <div class="w-full md:w-80 relative">
                     <span class="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none text-emerald-500">🔍</span>
                     <input type="text" id="aiSearchInput" oninput="filterProducts()" class="w-full bg-gray-50 dark:bg-gray-950 border border-gray-300 dark:border-gray-700 rounded-xl pr-12 pl-4 py-2.5 text-xs focus:outline-none focus:border-emerald-500 shadow-inner transition" placeholder="ابحث عن أي سلعة...">
@@ -67,14 +70,49 @@
             </div>
 
             <div id="productsGrid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="col-span-3 text-center py-16 text-gray-400 dark:text-gray-500 bg-white dark:bg-gray-900/50 rounded-3xl border border-dashed border-gray-300 dark:border-gray-800 animate-pulse">
+                <div id="loadingText" class="col-span-3 text-center py-16 text-gray-400 dark:text-gray-500 bg-white dark:bg-gray-900/50 rounded-3xl border border-dashed border-gray-300 dark:border-gray-800 animate-pulse">
                     📭 جاري جلب السلع من الحانوت...
                 </div>
             </div>
         </div>
     </main>
 
-    <!-- نافذة تفاصيل المنتج والتعريف الذكي -->
+    <!-- نافذة تسجيل دخول البائع -->
+    <div id="adminLoginModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-gray-900 max-w-sm w-full p-6 rounded-3xl space-y-4 relative border border-gray-200 dark:border-gray-800 shadow-2xl fade-in">
+            <div class="flex justify-between items-center border-b border-gray-200 dark:border-gray-800 pb-3">
+                <h3 class="text-base font-bold text-amber-500">🔐 تسجيل دخول البائع</h3>
+                <button onclick="closeAdminLoginModal()" class="text-gray-400 hover:text-white font-bold text-lg">✕</button>
+            </div>
+            <div class="space-y-3">
+                <div>
+                    <label class="block text-[11px] font-semibold text-gray-500 mb-1">اسم المستخدم (Username):</label>
+                    <input type="text" id="adminUser" class="w-full bg-gray-50 dark:bg-gray-950 border border-gray-300 dark:border-gray-800 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-amber-500" placeholder="DJAMEL HR">
+                </div>
+                <div>
+                    <label class="block text-[11px] font-semibold text-gray-500 mb-1">كلمة المرور (Password):</label>
+                    <input type="password" id="adminPass" class="w-full bg-gray-50 dark:bg-gray-950 border border-gray-300 dark:border-gray-800 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-amber-500" placeholder="Djamel2003">
+                </div>
+                <button onclick="verifyAdminLogin()" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-2.5 rounded-xl transition text-xs shadow-md">دخول للوحة التحكم 🚀</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- لوحة التحكم الإدارية -->
+    <div id="adminModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-gray-900 max-w-3xl w-full p-6 md:p-8 rounded-3xl space-y-6 relative border border-gray-200 dark:border-gray-800 shadow-2xl max-h-[90vh] overflow-y-auto fade-in">
+            <div class="flex justify-between items-center border-b border-gray-200 dark:border-gray-800 pb-4">
+                <h3 id="adminModalTitle" class="text-xl font-bold text-amber-500">⚙️ لوحة البائع (ترتيب، أسعار ووصف المنتجات)</h3>
+                <button onclick="closeAdminPanel()" class="text-gray-400 hover:text-white font-bold text-xl">✕</button>
+            </div>
+            <div class="space-y-4">
+                <div id="adminProductsList" class="space-y-4 max-h-[50vh] overflow-y-auto pr-2"></div>
+                <button onclick="saveAdminChanges()" id="adminSaveBtn" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 rounded-xl transition text-sm shadow-lg">حفظ كل التعديلات 💾</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- نافذة تفاصيل المنتج -->
     <div id="productModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
         <div class="bg-white dark:bg-gray-900 max-w-xl w-full p-6 md:p-8 rounded-3xl space-y-6 relative border border-gray-200 dark:border-gray-800 shadow-2xl max-h-[90vh] overflow-y-auto fade-in">
             <button onclick="closeProductModal()" class="absolute top-4 left-4 text-gray-400 hover:text-white font-bold text-xl bg-gray-100 dark:bg-gray-800 w-9 h-9 rounded-full flex items-center justify-center transition">✕</button>
@@ -86,18 +124,18 @@
             <div class="space-y-3">
                 <div class="flex justify-between items-center">
                     <h3 id="modalProductName" class="text-xl font-black"></h3>
-                    <span id="modalProductStock" class="text-xs bg-emerald-600 text-white px-3 py-1 rounded-full font-bold"></span>
+                    <div id="modalProductStockBadge"></div>
                 </div>
                 <p id="modalProductPrice" class="text-emerald-500 font-extrabold text-2xl"></p>
                 
                 <div class="bg-amber-50 dark:bg-amber-950/30 border border-amber-500/20 p-4 rounded-2xl space-y-2">
-                    <span class="text-xs font-bold text-amber-600 dark:text-amber-400 flex items-center gap-1">✨ تعريف الذكاء الاصطناعي للمنتج:</span>
+                    <span id="modalAiDescTitle" class="text-xs font-bold text-amber-600 dark:text-amber-400 flex items-center gap-1">✨ تعريف المنتج:</span>
                     <p id="modalProductDesc" class="text-gray-700 dark:text-gray-300 text-xs leading-relaxed"></p>
                 </div>
             </div>
 
             <div class="flex items-center justify-between bg-gray-50 dark:bg-gray-950 px-4 py-3 rounded-2xl border border-gray-200 dark:border-gray-800">
-                <span class="text-xs font-bold text-gray-500">اختر الكمية:</span>
+                <span id="modalQtyLabel" class="text-xs font-bold text-gray-500">اختر الكمية:</span>
                 <div class="flex items-center gap-4">
                     <button onclick="changeModalQty(-1)" class="w-8 h-8 bg-gray-200 dark:bg-gray-800 rounded-xl font-bold hover:bg-emerald-500 hover:text-white transition">-</button>
                     <span id="modalQtyVal" class="text-base font-black">1</span>
@@ -116,35 +154,35 @@
         <div class="bg-white dark:bg-gray-900 w-full max-w-md h-full p-6 flex flex-col justify-between shadow-2xl overflow-y-auto fade-in">
             <div class="space-y-6">
                 <div class="flex justify-between items-center border-b border-gray-200 dark:border-gray-800 pb-4">
-                    <h3 class="text-lg font-bold flex items-center gap-2">🛒 سلة المشتريات تاعك</h3>
+                    <h3 id="cartDrawerTitle" class="text-lg font-bold flex items-center gap-2">🛒 سلة المشتريات تاعك</h3>
                     <button onclick="toggleCartDrawer()" class="text-gray-400 hover:text-white font-bold text-xl">✕</button>
                 </div>
                 <div id="cartItemsContainer" class="space-y-4 max-h-[40vh] overflow-y-auto">
-                    <p class="text-center text-gray-400 py-8 text-sm">السلة فارغة، زيد حط فيها صوالحك!</p>
+                    <p id="emptyCartText" class="text-center text-gray-400 py-8 text-sm">السلة فارغة، زيد حط فيها صوالحك!</p>
                 </div>
             </div>
 
             <div class="border-t border-gray-200 dark:border-gray-800 pt-4 space-y-4">
                 <div class="space-y-2 text-xs font-bold">
-                    <div class="flex justify-between"><span>مجموع السلعة:</span> <span id="cartSubtotal">0 دج</span></div>
+                    <div class="flex justify-between"><span id="subtotalText">مجموع السلعة:</span> <span id="cartSubtotal">0 دج</span></div>
                     
                     <div>
-                        <label class="block text-[11px] font-semibold text-gray-500 mb-1">اختر ولايتك (من 1 إلى 58):</label>
+                        <label id="stateLabelText" class="block text-[11px] font-semibold text-gray-500 mb-1">اختر ولايتك (من 1 إلى 58):</label>
                         <select id="cartStateSelect" onchange="updateCartTotals()" class="w-full bg-gray-50 dark:bg-gray-950 border border-gray-300 dark:border-gray-800 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-emerald-500">
                         </select>
                     </div>
 
                     <div>
-                        <label class="block text-[11px] font-semibold text-gray-500 mb-1">وين تحب يوصلك الكولي (ZR Express)؟</label>
+                        <label id="deliveryTypeLabelText" class="block text-[11px] font-semibold text-gray-500 mb-1">وين تحب يوصلك الكولي (ZR Express)؟</label>
                         <select id="cartDeliveryType" onchange="updateCartTotals()" class="w-full bg-gray-50 dark:bg-gray-950 border border-gray-300 dark:border-gray-800 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-emerald-500">
-                            <option value="office">توصيل لمكتب الشركة (Bureau)</option>
-                            <option value="home">توصيل لداركم (Domicile)</option>
+                            <option value="office" id="deliveryOfficeOpt">توصيل لمكتب الشركة (Bureau)</option>
+                            <option value="home" id="deliveryHomeOpt">توصيل لداركم (Domicile)</option>
                         </select>
                     </div>
 
-                    <div class="flex justify-between"><span>حق التوصيل:</span> <span id="cartShippingPrice">0 دج</span></div>
+                    <div class="flex justify-between"><span id="shippingText">حق التوصيل:</span> <span id="cartShippingPrice">0 دج</span></div>
                     <hr class="border-gray-200 dark:border-gray-800">
-                    <div class="flex justify-between text-sm text-emerald-500 font-black"><span>المجموع الكلي:</span> <span id="cartTotalPrice">0 دج</span></div>
+                    <div class="flex justify-between text-sm text-emerald-500 font-black"><span id="totalText">المجموع الكلي:</span> <span id="cartTotalPrice">0 دج</span></div>
                 </div>
                 <button onclick="openCheckoutModal()" id="checkoutBtn" class="w-full bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-bold py-3 rounded-xl transition text-sm shadow-lg shadow-emerald-500/20 opacity-50 cursor-not-allowed" disabled>أكد طلبي والدفع عند الاستلام 🚀</button>
             </div>
@@ -155,24 +193,24 @@
     <div id="checkoutModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
         <div class="bg-white dark:bg-gray-900 max-w-lg w-full p-6 md:p-8 rounded-3xl space-y-4 relative border border-gray-200 dark:border-gray-800 shadow-2xl max-h-[90vh] overflow-y-auto fade-in">
             <div class="flex justify-between items-center border-b border-gray-200 dark:border-gray-800 pb-3">
-                <h3 class="text-lg font-bold">أعطينا معلوماتك باش نعيطو ليك</h3>
+                <h3 id="checkoutModalTitle" class="text-lg font-bold">أعطينا معلوماتك باش نعيطو ليك</h3>
                 <button onclick="closeCheckoutModal()" class="text-gray-400 hover:text-white font-bold text-xl">✕</button>
             </div>
             <form id="orderForm" onsubmit="submitOrder(event)" class="space-y-3">
                 <div>
-                    <label class="block text-[11px] font-semibold text-gray-500 mb-1">الاسم واللقب الكريم</label>
+                    <label id="nameLabel" class="block text-[11px] font-semibold text-gray-500 mb-1">الاسم واللقب الكريم</label>
                     <input type="text" id="clientName" required class="w-full bg-gray-50 dark:bg-gray-950 border border-gray-300 dark:border-gray-800 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-emerald-500">
                 </div>
                 <div>
-                    <label class="block text-[11px] font-semibold text-gray-500 mb-1">رقم الهاتف (ضروري باش نتأكدو معك)</label>
+                    <label id="phoneLabel" class="block text-[11px] font-semibold text-gray-500 mb-1">رقم الهاتف (ضروري باش نتأكدو معك)</label>
                     <input type="tel" id="clientPhone" required class="w-full bg-gray-50 dark:bg-gray-950 border border-gray-300 dark:border-gray-800 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-emerald-500" placeholder="06 / 05 / 07 ...">
                 </div>
                 <div>
-                    <label class="block text-[11px] font-semibold text-gray-500 mb-1">عنوانك بالتفصيل (الحي، المدينة...)</label>
+                    <label id="addressLabel" class="block text-[11px] font-semibold text-gray-500 mb-1">عنوانك بالتفصيل (الحي، المدينة...)</label>
                     <input type="text" id="clientAddress" required class="w-full bg-gray-50 dark:bg-gray-950 border border-gray-300 dark:border-gray-800 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-emerald-500">
                 </div>
                 <div>
-                    <label class="block text-[11px] font-semibold text-gray-500 mb-1">ملاحظات أو تعليق (اختياري):</label>
+                    <label id="commentLabel" class="block text-[11px] font-semibold text-gray-500 mb-1">ملاحظات أو تعليق (اختياري):</label>
                     <textarea id="clientComment" rows="2" class="w-full bg-gray-50 dark:bg-gray-950 border border-gray-300 dark:border-gray-800 rounded-xl px-4 py-2 text-sm focus:outline-none focus:border-emerald-500" placeholder="اكتب تعليقك هنا..."></textarea>
                 </div>
                 <button type="submit" id="submitOrderBtn" class="w-full bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-bold py-3 rounded-xl transition text-sm shadow-lg shadow-emerald-500/20 mt-1">ابعث الطلب وتكل على ربي 📞</button>
@@ -180,22 +218,7 @@
         </div>
     </div>
 
-    <!-- لوحة التحكم الإدارية -->
-    <div id="adminModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white dark:bg-gray-900 max-w-2xl w-full p-6 md:p-8 rounded-3xl space-y-6 relative border border-gray-200 dark:border-gray-800 shadow-2xl max-h-[90vh] overflow-y-auto fade-in">
-            <div class="flex justify-between items-center border-b border-gray-200 dark:border-gray-800 pb-4">
-                <h3 class="text-xl font-bold text-amber-500">⚙️ لوحة البائع (تعديل الأثمان)</h3>
-                <button onclick="closeAdminPanel()" class="text-gray-400 hover:text-white font-bold text-xl">✕</button>
-            </div>
-            <div class="space-y-4">
-                <h4 class="text-sm font-bold">بدل ثمن السلعة:</h4>
-                <div id="adminProductsList" class="space-y-3 max-h-60 overflow-y-auto pr-2"></div>
-                <button onclick="saveAdminChanges()" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 rounded-xl transition text-sm shadow-lg">حفظ التعديلات 💾</button>
-            </div>
-        </div>
-    </div>
-
-    <footer class="border-t border-gray-200 dark:border-gray-800 py-6 text-center text-xs text-gray-500">سوق DZ الحر © 2026 - خدمة تليق بيك</footer>
+    <footer id="footerText" class="border-t border-gray-200 dark:border-gray-800 py-6 text-center text-xs text-gray-500">سوق DZ الحر © 2026 - خدمة تليق بيك</footer>
 
     <script>
         const scriptURL = 'https://script.google.com/macros/s/AKfycby3zu9qNGCduyqLzEZ6Z0hjRG39s266vOb-K5ARPbBYahbWj9YMX9te8UEDolhinoDI/exec';
@@ -204,13 +227,147 @@
         let shippingRates = {};
         let currentModalProductIndex = null;
         let modalQty = 1;
+        let currentLang = 'ar';
+
+        const translations = {
+            ar: {
+                topBarText: "🇩🇿 مرحبا بيك في السوق العصري الحار! توصيل لـ 58 ولاية مع ZR Express | الدفع بعد ما تستلم سلعتك",
+                langToggleBtn: "FR / عربية",
+                adminBtn: "⚙️ لوحة البائع",
+                storeBrand: "سوق DZ 🛒",
+                cartBtnText: "🛒 سلتك",
+                aiBadge: "مساعد السوق الذكي 💬",
+                heroTitle: "\"أهلا بيك يا خويا، راك فالسوق الأضمن والأسرع!\"",
+                heroDesc: "أنا المساعد الذكي تاعك هنا. اضغط على أي منتج باش تشوف التعريف والكمية المتبقية بدقة!",
+                shopNowBtn: "✨ تسوق الآن يا خويا",
+                marketTitle: "🛍️ حانوت السلع والعروض",
+                searchInputPlaceholder: "ابحث عن أي سلعة...",
+                loadingText: "📭 جاري جلب السلع من الحانوت...",
+                modalAiDescTitle: "✨ تعريف المنتج:",
+                modalQtyLabel: "اختر الكمية:",
+                modalAddToCartBtn: "أضف للسلة يا خويا 🛒",
+                cartDrawerTitle: "🛒 سلة المشتريات تاعك",
+                emptyCartText: "السلة فارغة، زيد حط فيها صوالحك!",
+                subtotalText: "مجموع السلعة:",
+                stateLabelText: "اختر ولايتك (من 1 إلى 58):",
+                deliveryTypeLabelText: "وين تحب يوصلك الكولي (ZR Express)؟",
+                deliveryOfficeOpt: "توصيل لمكتب الشركة (Bureau)",
+                deliveryHomeOpt: "توصيل لداركم (Domicile)",
+                shippingText: "حق التوصيل:",
+                totalText: "المجموع الكلي:",
+                checkoutBtn: "أكد طلبي والدفع عند الاستلام 🚀",
+                checkoutModalTitle: "أعطينا معلوماتك باش نعيطو ليك",
+                nameLabel: "الاسم واللقب الكريم",
+                phoneLabel: "رقم الهاتف (ضروري باش نتأكدو معك)",
+                addressLabel: "عنوانك بالتفصيل (الحي، المدينة...)",
+                commentLabel: "ملاحظات أو تعليق (اختياري):",
+                commentPlaceholder: "اكتب تعليقك هنا...",
+                submitOrderBtn: "ابعث الطلب وتكل على ربي 📞",
+                footerText: "سوق DZ الحر © 2026 - خدمة تليق بيك",
+                outOfStock: "خلصت السلعة ❌",
+                lowStock: (q) => `⚠️ كمية قليلة (${q})`,
+                inStock: (q) => `متوفر: ${q} 📦`,
+                addToCartBtn: "أضف للسلة يا خويا 🛒",
+                cardDetailHint: "🔍 اضغط لعرض التعريف والتشخيص",
+                addedToast: (q, name) => `✅ تمت إضافة ${q} من "${name}" للسلة!`,
+                orderSuccessMsg: "✅ لقد تم الطلب بنجاح! يرجى إبقاء الهاتف مفتوحاً للاتصال وتأكيد الطلب."
+            },
+            fr: {
+                topBarText: "🇩🇿 Bienvenue sur Souq DZ ! Livraison 58 Wilayas avec ZR Express | Paiement à la livraison",
+                langToggleBtn: "العربية / FR",
+                adminBtn: "⚙️ Admin",
+                storeBrand: "Souq DZ 🛒",
+                cartBtnText: "🛒 Panier",
+                aiBadge: "Assistant IA 💬",
+                heroTitle: "\"Bienvenue cher ami, le marché le plus sûr et rapide!\"",
+                heroDesc: "Je suis votre assistant intelligent. Cliquez sur un produit pour voir sa description et son stock exact !",
+                shopNowBtn: "✨ Acheter maintenant",
+                marketTitle: "🛍️ Catalogue des Produits",
+                searchInputPlaceholder: "Rechercher un produit...",
+                loadingText: "📭 Chargement des produits...",
+                modalAiDescTitle: "✨ Description du produit :",
+                modalQtyLabel: "Quantité :",
+                modalAddToCartBtn: "Ajouter au panier 🛒",
+                cartDrawerTitle: "🛒 Votre Panier",
+                emptyCartText: "Votre panier est vide !",
+                subtotalText: "Sous-total :",
+                stateLabelText: "Choisissez votre Wilaya (1 à 58) :",
+                deliveryTypeLabelText: "Mode de livraison (ZR Express) :",
+                deliveryOfficeOpt: "Livraison au bureau (Bureau)",
+                deliveryHomeOpt: "Livraison à domicile (Domicile)",
+                shippingText: "Frais de port :",
+                totalText: "Total général :",
+                checkoutBtn: "Confirmer la commande (Paiement à la livraison) 🚀",
+                checkoutModalTitle: "Vos coordonnées pour confirmation",
+                nameLabel: "Nom et Prénom",
+                phoneLabel: "Numéro de téléphone",
+                addressLabel: "Adresse détaillée (Quartier, Ville...)",
+                commentLabel: "Remarques ou commentaires (Optionnel) :",
+                commentPlaceholder: "Écrivez votre commentaire ici...",
+                submitOrderBtn: "Envoyer la commande 📞",
+                footerText: "Souq DZ © 2026 - Service de qualité",
+                outOfStock: "Rupture de stock ❌",
+                lowStock: (q) => `⚠️ Stock faible (${q})`,
+                inStock: (q) => `En stock: ${q} 📦`,
+                addToCartBtn: "Ajouter au panier 🛒",
+                cardDetailHint: "🔍 Cliquez pour voir les détails",
+                addedToast: (q, name) => `✅ ${q}x "${name}" ajouté au panier !`,
+                orderSuccessMsg: "✅ Commande validée avec succès ! Veuillez garder votre téléphone allumé pour l'appel de confirmation."
+            }
+        };
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'ar' ? 'fr' : 'ar';
+            const htmlRoot = document.getElementById('htmlRoot');
+            htmlRoot.setAttribute('dir', currentLang === 'ar' ? 'rtl' : 'ltr');
+            htmlRoot.setAttribute('lang', currentLang);
+            updateStaticTexts();
+            renderProducts(allProducts);
+            renderCartItems();
+        }
+
+        function updateStaticTexts() {
+            const t = translations[currentLang];
+            document.getElementById('topBarText').innerText = t.topBarText;
+            document.getElementById('langToggleBtn').innerText = t.langToggleBtn;
+            document.getElementById('adminBtn').innerText = t.adminBtn;
+            document.getElementById('storeBrand').innerText = t.storeBrand;
+            document.getElementById('cartBtnText').innerText = t.cartBtnText;
+            document.getElementById('aiBadge').innerText = t.aiBadge;
+            document.getElementById('heroTitle').innerText = t.heroTitle;
+            document.getElementById('heroDesc').innerText = t.heroDesc;
+            document.getElementById('shopNowBtn').innerText = t.shopNowBtn;
+            document.getElementById('marketTitle').innerText = t.marketTitle;
+            document.getElementById('aiSearchInput').placeholder = t.searchInputPlaceholder;
+            document.getElementById('loadingText').innerText = t.loadingText;
+            document.getElementById('modalAiDescTitle').innerText = t.modalAiDescTitle;
+            document.getElementById('modalQtyLabel').innerText = t.modalQtyLabel;
+            document.getElementById('modalAddToCartBtn').innerText = t.modalAddToCartBtn;
+            document.getElementById('cartDrawerTitle').innerText = t.cartDrawerTitle;
+            document.getElementById('subtotalText').innerText = t.subtotalText;
+            document.getElementById('stateLabelText').innerText = t.stateLabelText;
+            document.getElementById('deliveryTypeLabelText').innerText = t.deliveryTypeLabelText;
+            document.getElementById('deliveryOfficeOpt').innerText = t.deliveryOfficeOpt;
+            document.getElementById('deliveryHomeOpt').innerText = t.deliveryHomeOpt;
+            document.getElementById('shippingText').innerText = t.shippingText;
+            document.getElementById('totalText').innerText = t.totalText;
+            document.getElementById('checkoutBtn').innerText = t.checkoutBtn;
+            document.getElementById('checkoutModalTitle').innerText = t.checkoutModalTitle;
+            document.getElementById('nameLabel').innerText = t.nameLabel;
+            document.getElementById('phoneLabel').innerText = t.phoneLabel;
+            document.getElementById('addressLabel').innerText = t.addressLabel;
+            document.getElementById('commentLabel').innerText = t.commentLabel;
+            document.getElementById('clientComment').placeholder = t.commentPlaceholder;
+            document.getElementById('submitOrderBtn').innerText = t.submitOrderBtn;
+            document.getElementById('footerText').innerText = t.footerText;
+        }
 
         async function fetchStoreData() {
             try {
                 const response = await fetch(scriptURL);
                 const data = await response.json();
                 if (data.products) {
-                    allProducts = data.products.map(p => ({ ...p, uiQty: 1 }));
+                    allProducts = data.products.map((p, idx) => ({ ...p, uiQty: 1, sortOrder: idx + 1 }));
                 }
                 if (data.shipping) shippingRates = data.shipping;
                 
@@ -219,15 +376,22 @@
                 const localEdits = localStorage.getItem('admin_store_edits');
                 if (localEdits) {
                     const parsed = JSON.parse(localEdits);
-                    if (parsed.prices) {
-                        allProducts.forEach(p => {
-                            if (parsed.prices[p.name] !== undefined) p.price = parsed.prices[p.name];
+                    if (parsed.items) {
+                        parsed.items.forEach(savedItem => {
+                            const prod = allProducts.find(p => p.name === savedItem.name);
+                            if (prod) {
+                                if (savedItem.price !== undefined) prod.price = savedItem.price;
+                                if (savedItem.desc !== undefined) prod.desc = savedItem.desc;
+                                if (savedItem.sortOrder !== undefined) prod.sortOrder = savedItem.sortOrder;
+                            }
                         });
                     }
                 }
+                
+                allProducts.sort((a, b) => a.sortOrder - b.sortOrder);
                 renderProducts(allProducts);
             } catch (error) {
-                document.getElementById('productsGrid').innerHTML = `<div class="col-span-3 text-center text-red-500">مكاش اتصال مليح مع السيرفر، تأكد من رابط السكريبت.</div>`;
+                document.getElementById('productsGrid').innerHTML = `<div class="col-span-3 text-center text-red-500">مشكل في الاتصال بالسيرفر.</div>`;
             }
         }
 
@@ -247,18 +411,27 @@
         function renderProducts(items) {
             const grid = document.getElementById('productsGrid');
             grid.innerHTML = '';
+            const t = translations[currentLang];
             if (!items || items.length === 0) {
-                grid.innerHTML = `<div class="col-span-3 text-center py-16 text-gray-400 dark:text-gray-500 bg-white dark:bg-gray-900/50 rounded-3xl border border-dashed border-gray-300 dark:border-gray-800">📭 الحانوت فارغ حالياً. عمر السلع في Google Sheets باش تبان هنا!</div>`;
+                grid.innerHTML = `<div class="col-span-3 text-center py-16 text-gray-400 dark:text-gray-500 bg-white dark:bg-gray-900/50 rounded-3xl border border-dashed border-gray-300 dark:border-gray-800">${t.loadingText}</div>`;
                 return;
             }
             items.forEach((prod, index) => {
                 const isOutOfStock = prod.stock <= 0;
+                const isLowStock = prod.stock > 0 && prod.stock <= 3;
+                
+                const stockBadgeHTML = isOutOfStock 
+                    ? `<span class="absolute top-3 right-3 text-[10px] bg-red-600 text-white px-2.5 py-1 rounded-full font-bold shadow">${t.outOfStock}</span>`
+                    : isLowStock 
+                    ? `<span class="absolute top-3 right-3 text-[10px] bg-red-500 text-white px-2.5 py-1 rounded-full font-bold shadow animate-pulse">${t.lowStock(prod.stock)}</span>`
+                    : `<span class="absolute top-3 right-3 text-[10px] bg-emerald-600 text-white px-2.5 py-1 rounded-full font-bold shadow">${t.inStock(prod.stock)}</span>`;
+
                 grid.innerHTML += `
                     <div class="bg-white dark:bg-gray-900 rounded-3xl overflow-hidden border border-gray-200 dark:border-gray-800 p-5 flex flex-col justify-between space-y-4 shadow-xl fade-in">
                         <div onclick="openProductModal(${index})" class="h-56 bg-gray-100 dark:bg-gray-950 rounded-2xl overflow-hidden relative group cursor-pointer">
                             <img src="${prod.image}" alt="${prod.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
-                            <span class="absolute top-3 right-3 text-[10px] bg-emerald-600 text-white px-2.5 py-1 rounded-full font-bold shadow">متوفر: ${prod.stock} 📦</span>
-                            <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white font-bold text-xs">🔍 اضغط لعرض التعريف والتشخيص</div>
+                            ${stockBadgeHTML}
+                            <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white font-bold text-xs">${t.cardDetailHint}</div>
                         </div>
                         <div class="space-y-2">
                             <h3 onclick="openProductModal(${index})" class="text-lg font-bold cursor-pointer hover:text-emerald-500 transition">${prod.name}</h3>
@@ -266,7 +439,7 @@
                             <p class="text-gray-600 dark:text-gray-400 text-xs leading-relaxed line-clamp-2">${prod.desc}</p>
                         </div>
                         <button ${isOutOfStock ? 'disabled' : `onclick="addToCartDirect(${index}, 1)"`} class="w-full ${isOutOfStock ? 'bg-gray-400 cursor-not-allowed' : 'bg-gradient-to-r from-amber-500 to-emerald-600 hover:opacity-90'} text-white font-bold py-3 rounded-xl transition text-sm shadow-lg shadow-amber-500/25">
-                            ${isOutOfStock ? 'كملت السلعة' : 'أضف للسلة يا خويا 🛒'}
+                            ${isOutOfStock ? t.outOfStock : t.addToCartBtn}
                         </button>
                     </div>
                 `;
@@ -277,9 +450,21 @@
             currentModalProductIndex = index;
             modalQty = 1;
             const prod = allProducts[index];
+            const t = translations[currentLang];
             document.getElementById('modalProductImg').src = prod.image;
             document.getElementById('modalProductName').innerText = prod.name;
-            document.getElementById('modalProductStock').innerText = `متوفر: ${prod.stock} 📦`;
+            
+            const isLowStock = prod.stock > 0 && prod.stock <= 3;
+            const stockBadgeContainer = document.getElementById('modalProductStockBadge');
+            
+            if (prod.stock <= 0) {
+                stockBadgeContainer.innerHTML = `<span class="text-xs bg-red-600 text-white px-3 py-1 rounded-full font-bold">${t.outOfStock}</span>`;
+            } else if (isLowStock) {
+                stockBadgeContainer.innerHTML = `<span class="text-xs bg-red-500 text-white px-3 py-1 rounded-full font-bold animate-pulse">${t.lowStock(prod.stock)}</span>`;
+            } else {
+                stockBadgeContainer.innerHTML = `<span class="text-xs bg-emerald-600 text-white px-3 py-1 rounded-full font-bold">${t.inStock(prod.stock)}</span>`;
+            }
+
             document.getElementById('modalProductPrice').innerText = prod.price + " دج";
             document.getElementById('modalProductDesc').innerText = prod.desc;
             document.getElementById('modalQtyVal').innerText = modalQty;
@@ -312,6 +497,7 @@
 
         function addToCartDirect(index, qtyToAdd) {
             const prod = allProducts[index];
+            const t = translations[currentLang];
             const existing = cart.find(item => item.name === prod.name);
             if (existing) {
                 existing.qty += qtyToAdd;
@@ -322,7 +508,7 @@
             
             const toast = document.createElement('div');
             toast.className = 'fixed bottom-5 left-5 bg-emerald-600 text-white text-xs px-4 py-3 rounded-2xl shadow-2xl z-50 fade-in font-bold';
-            toast.innerText = `✅ تمت إضافة ${qtyToAdd} من "${prod.name}" للسلة!`;
+            toast.innerText = t.addedToast(qtyToAdd, prod.name);
             document.body.appendChild(toast);
             setTimeout(() => toast.remove(), 2500);
         }
@@ -356,8 +542,9 @@
 
         function renderCartItems() {
             const container = document.getElementById('cartItemsContainer');
+            const t = translations[currentLang];
             if (cart.length === 0) {
-                container.innerHTML = `<p class="text-center text-gray-400 py-8 text-sm">السلة فارغة، زيد حط فيها صوالحك!</p>`;
+                container.innerHTML = `<p class="text-center text-gray-400 py-8 text-sm">${t.emptyCartText}</p>`;
                 updateCartTotals();
                 return;
             }
@@ -415,21 +602,50 @@
             document.getElementById('checkoutModal').classList.add('hidden');
         }
 
-        function openAdminPanel() {
-            const pass = prompt("أدخل كلمة المرور الخاصة بالبائع:");
-            if (pass !== "1234") {
-                if (pass !== null) alert("كلمة المرور غالطة!");
-                return;
+        function openAdminLoginModal() {
+            document.getElementById('adminLoginModal').classList.remove('hidden');
+        }
+
+        function closeAdminLoginModal() {
+            document.getElementById('adminLoginModal').classList.add('hidden');
+        }
+
+        function verifyAdminLogin() {
+            const u = document.getElementById('adminUser').value.trim();
+            const p = document.getElementById('adminPass').value.trim();
+
+            if (u === "DJAMEL HR" && p === "Djamel2003") {
+                closeAdminLoginModal();
+                document.getElementById('adminUser').value = "";
+                document.getElementById('adminPass').value = "";
+                openAdminPanel();
+            } else {
+                alert(currentLang === 'ar' ? "❌ اسم المستخدم أو كلمة المرور غير صحيحة!" : "❌ Identifiant ou mot de passe incorrect !");
             }
+        }
+
+        function openAdminPanel() {
             const listContainer = document.getElementById('adminProductsList');
             listContainer.innerHTML = '';
-            allProducts.forEach(p => {
+            allProducts.forEach((p, idx) => {
                 listContainer.innerHTML += `
-                    <div class="flex justify-between items-center bg-gray-50 dark:bg-gray-950 p-3 rounded-xl border border-gray-200 dark:border-gray-800 text-xs">
-                        <span class="font-bold">${p.name}</span>
-                        <div class="flex items-center gap-2">
-                            <input type="number" data-prod-name="${p.name}" value="${p.price}" class="admin-price-input bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg px-2 py-1 w-24 text-center text-xs">
-                            <span>دج</span>
+                    <div class="bg-gray-50 dark:bg-gray-950 p-4 rounded-2xl border border-gray-200 dark:border-gray-800 space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span class="font-black text-sm text-amber-500">${p.name}</span>
+                            <div class="flex items-center gap-2">
+                                <label class="text-[11px] text-gray-400">الترتيب:</label>
+                                <input type="number" data-sort-name="${p.name}" value="${p.sortOrder !== undefined ? p.sortOrder : idx + 1}" class="admin-sort-input bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg px-2 py-1 w-16 text-center text-xs">
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
+                            <div>
+                                <label class="block text-[10px] text-gray-400 mb-1">السعر (دج):</label>
+                                <input type="number" data-prod-name="${p.name}" value="${p.price}" class="admin-price-input w-full bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg px-2 py-1.5 text-xs text-center">
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="block text-[10px] text-gray-400 mb-1">الوصف والتعريف:</label>
+                                <textarea data-desc-name="${p.name}" rows="2" class="admin-desc-input w-full bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg px-2 py-1 text-xs">${p.desc}</textarea>
+                            </div>
                         </div>
                     </div>
                 `;
@@ -443,17 +659,31 @@
 
         function saveAdminChanges() {
             const priceInputs = document.querySelectorAll('.admin-price-input');
-            const newPrices = {};
-            priceInputs.forEach(input => {
+            const descInputs = document.querySelectorAll('.admin-desc-input');
+            const sortInputs = document.querySelectorAll('.admin-sort-input');
+            
+            const savedItems = [];
+
+            priceInputs.forEach((input, i) => {
                 const name = input.getAttribute('data-prod-name');
                 const newPrice = Number(input.value) || 0;
-                newPrices[name] = newPrice;
+                const newDesc = descInputs[i].value;
+                const newSort = Number(sortInputs[i].value) || (i + 1);
+
                 const prod = allProducts.find(p => p.name === name);
-                if (prod) prod.price = newPrice;
+                if (prod) {
+                    prod.price = newPrice;
+                    prod.desc = newDesc;
+                    prod.sortOrder = newSort;
+                }
+
+                savedItems.push({ name: name, price: newPrice, desc: newDesc, sortOrder: newSort });
             });
 
-            localStorage.setItem('admin_store_edits', JSON.stringify({ prices: newPrices }));
-            alert("✅ تم حفظ التعديلات بنجاح يا خويا!");
+            localStorage.setItem('admin_store_edits', JSON.stringify({ items: savedItems }));
+            allProducts.sort((a, b) => a.sortOrder - b.sortOrder);
+
+            alert(currentLang === 'ar' ? "✅ تم حفظ التعديلات، الترتيب والوصف بنجاح يا خويا!" : "✅ Modifications enregistrées avec succès !");
             closeAdminPanel();
             renderProducts(allProducts);
         }
@@ -473,7 +703,8 @@
         function submitOrder(e) {
             e.preventDefault();
             const btn = document.getElementById('submitOrderBtn');
-            btn.innerText = "جاري بعث الطلب...";
+            const t = translations[currentLang];
+            btn.innerText = currentLang === 'ar' ? "جاري بعث الطلب..." : "Envoi en cours...";
             btn.disabled = true;
 
             const selectedState = document.getElementById('cartStateSelect').value;
@@ -489,11 +720,11 @@
                 product: productsSummary,
                 totalPrice: total,
                 clientState: selectedState,
-                delivery: 'ZR Express - ' + (deliveryType === 'home' ? 'دار' : 'مكتب'),
+                delivery: 'ZR Express - ' + (deliveryType === 'home' ? (currentLang === 'ar' ? 'دار' : 'Domicile') : (currentLang === 'ar' ? 'مكتب' : 'Bureau')),
                 name: document.getElementById('clientName').value,
                 phone: document.getElementById('clientPhone').value,
                 address: document.getElementById('clientAddress').value,
-                comment: document.getElementById('clientComment', '').value || '',
+                comment: document.getElementById('clientComment').value || '',
                 cartItems: cart
             };
 
@@ -502,16 +733,17 @@
                 mode: 'no-cors',
                 body: JSON.stringify(orderData)
             }).then(() => {
-                alert("✅ تم إرسال طلبك بنجاح! رانا نعيطولك فالتليفون في أقرب وقت باش نأكدو.");
+                // إظهار الرسالة الجديدة والمطلوبة تماماً
+                alert(t.orderSuccessMsg);
                 closeCheckoutModal();
                 cart = [];
                 updateCartBadge();
                 document.getElementById('orderForm').reset();
-                btn.innerText = "ابعث الطلب وتكل على ربي 📞";
+                btn.innerText = t.submitOrderBtn;
                 btn.disabled = false;
             }).catch(() => {
-                alert("كين مشكل فالاتصال.");
-                btn.innerText = "ابعث الطلب وتكل على ربي 📞";
+                alert(currentLang === 'ar' ? "كين مشكل فالاتصال." : "Erreur de connexion.");
+                btn.innerText = t.submitOrderBtn;
                 btn.disabled = false;
             });
         }
