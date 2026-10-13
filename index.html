@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" id="htmlRoot">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">متجري الجزائري العصري | E-Shop DZ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Tajawal', sans-serif; background-color: #0b0f19; color: #f3f4f6; }
+        .glass-card { background: rgba(17, 24, 39, 0.85); backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .fade-in { animation: fadeIn 0.4s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between">
+
+    <!-- شريط التنقل العلوي -->
+    <header class="glass-card sticky top-0 z-50 border-b border-gray-800 shadow-lg">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <span id="brandName" class="text-2xl font-black bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">متجري الجزائري DZ</span>
+            <div class="flex items-center gap-4">
+                <button onclick="toggleLang()" class="text-xs bg-gray-800 hover:bg-gray-700 text-emerald-400 border border-emerald-500/30 px-3.5 py-2 rounded-xl font-bold transition shadow">
+                    🌐 <span id="langBtnText">Français</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- المحتوى الرئيسي للمتجر -->
+    <main class="max-w-7xl mx-auto px-6 py-12 flex-grow space-y-12">
+        
+        <!-- واجهة الترحيب وتعريف المتجر -->
+        <div class="text-center space-y-4 py-10 glass-card rounded-3xl border border-gray-800 relative overflow-hidden shadow-2xl fade-in">
+            <div class="absolute inset-0 bg-gradient-to-r from-emerald-500/10 to-cyan-500/10 pointer-events-none"></div>
+            <span id="badgeText" class="text-xs font-bold text-emerald-400 bg-emerald-950/80 border border-emerald-800 px-4 py-1.5 rounded-full inline-block">التوصيل متوفر لجميع ولايات الوطن 58 ولاية 🇩🇿</span>
+            <h1 id="heroTitle" class="text-3xl md:text-5xl font-black text-white tracking-tight leading-snug">تسوق أرقى المنتجات العصرية بضغطة زر</h1>
+            <p id="heroDesc" class="text-gray-400 text-sm max-w-2xl mx-auto leading-relaxed">
+                منصتك الجزائرية الأولى للتسوق الآمن. نوفر لك منتجات أصلية ذات جودة عالية مع ميزة الدفع عند الاستلام وضمان كامل على سرعة التوصيل.
+            </p>
+        </div>
+
+        <!-- قائمة المنتجات -->
+        <div class="space-y-6">
+            <div class="flex justify-between items-center">
+                <h2 id="productsHeader" class="text-2xl font-black text-white">المنتجات المتوفرة</h2>
+                <span class="text-xs text-emerald-400 font-semibold animate-pulse">● متصل بـ Google Sheets</span>
+            </div>
+
+            <!-- شبكة المنتجات -->
+            <div id="productsGrid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- منتج رقم 1 -->
+                <div class="glass-card rounded-3xl overflow-hidden border border-gray-800 p-5 flex flex-col justify-between space-y-4 shadow-xl fade-in hover:border-emerald-500/50 transition">
+                    <div class="h-56 bg-gray-900 rounded-2xl overflow-hidden relative group">
+                        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500" alt="ساعة ذكية" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <span class="absolute top-3 right-3 text-[10px] bg-emerald-600 text-white px-2.5 py-1 rounded-full font-bold shadow">الأكثر مبيعاً ⭐</span>
+                    </div>
+                    <div class="space-y-2">
+                        <h3 class="text-lg font-bold text-white">ساعة ذكية عصرية Ultra</h3>
+                        <p class="text-emerald-400 font-extrabold text-lg">5900 دج</p>
+                        <p class="text-gray-400 text-xs leading-relaxed">وصف ذكي بالذكاء الاصطناعي: تصميم أنيق، شاشة واضحة عالية الدقة، تدعم المكالمات ومتابعة الحالة الصحية، بطارية تدوم طويلاً.</p>
+                    </div>
+                    <button onclick="openProductModal('ساعة ذكية عصرية Ultra', '5900 دج', 'تصميم أنيق، شاشة واضحة عالية الدقة، تدعم المكالمات ومتابعة الحالة الصحية، بطارية تدوم طويلاً.', 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500')" class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:opacity-90 text-white font-bold py-3 rounded-xl transition text-sm shadow-lg shadow-emerald-600/20">
+                        عرض التفاصيل والشراء 🛍️
+                    </button>
+                </div>
+
+                <!-- منتج رقم 2 -->
+                <div class="glass-card rounded-3xl overflow-hidden border border-gray-800 p-5 flex flex-col justify-between space-y-4 shadow-xl fade-in hover:border-emerald-500/50 transition">
+                    <div class="h-56 bg-gray-900 rounded-2xl overflow-hidden relative group">
+                        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500" alt="سماعات لاسلكية" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <span class="absolute top-3 right-3 text-[10px] bg-cyan-600 text-white px-2.5 py-1 rounded-full font-bold shadow">عرض خاص 🔥</span>
+                    </div>
+                    <div class="space-y-2">
+                        <h3 class="text-lg font-bold text-white">سماعات لاسلكية Pro</h3>
+                        <p class="text-emerald-400 font-extrabold text-lg">3800 دج</p>
+                        <p class="text-gray-400 text-xs leading-relaxed">وصف ذكي بالذكاء الاصطناعي: عزل تام للضوضاء، صوت نقي وعميق، ميكروفون مزدوج للمكالمات، وعتبة شحن سريعة.</p>
+                    </div>
+                    <button onclick="openProductModal('سماعات لاسلكية Pro', '3800 دج', 'عزل تام للضوضاء، صوت نقي وعميق، ميكروفون مزدوج للمكالمات، وعتبة شحن سريعة.', 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500')" class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:opacity-90 text-white font-bold py-3 rounded-xl transition text-sm shadow-lg shadow-emerald-600/20">
+                        عرض التفاصيل والشراء 🛍️
+                    </button>
+                </div>
+
+                <!-- منتج رقم 3 -->
+                <div class="glass-card rounded-3xl overflow-hidden border border-gray-800 p-5 flex flex-col justify-between space-y-4 shadow-xl fade-in hover:border-emerald-500/50 transition">
+                    <div class="h-56 bg-gray-900 rounded-2xl overflow-hidden relative group">
+                        <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=500" alt="سوار رياضي" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        <span class="absolute top-3 right-3 text-[10px] bg-indigo-600 text-white px-2.5 py-1 rounded-full font-bold shadow">جديد ✨</span>
+                    </div>
+                    <div class="space-y-2">
+                        <h3 class="text-lg font-bold text-white">سوار لياقة بدنية ذكي</h3>
+                        <p class="text-emerald-400 font-extrabold text-lg">2900 دج</p>
+                        <p class="text-gray-400 text-xs leading-relaxed">وصف ذكي بالذكاء الاصطناعي: تتبع دقيق للنشاط اليومي، حساب السعرات الحرارية، مقاوم للمياه ومناسب للتمارين الشاقة.</p>
+                    </div>
+                    <button onclick="openProductModal('سوار لياقة بدنية ذكي', '2900 دج', 'تتبع دقيق للنشاط اليومي، حساب السعرات الحرارية، مقاوم للمياه ومناسب للتمارين الشاقة.', 'https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=500')" class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:opacity-90 text-white font-bold py-3 rounded-xl transition text-sm shadow-lg shadow-emerald-600/20">
+                        عرض التفاصيل والشراء 🛍️
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- قسم آراء وتقييمات العملاء الإيجابية -->
+        <div class="space-y-6 pt-6">
+            <h2 id="reviewsHeader" class="text-2xl font-black text-white text-center">آراء الزبائن الأفاضل ⭐⭐⭐⭐⭐</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="glass-card p-6 rounded-3xl border border-gray-800 space-y-3 shadow-lg">
+                    <div class="flex items-center justify-between">
+                        <span class="font-bold text-sm text-white">أمير من الشلف</span>
+                        <span class="text-yellow-400 text-xs">★★★★★</span>
+                    </div>
+                    <p class="text-gray-400 text-xs leading-relaxed">"وصلني الطلب بسرعة قياسية وبنفس المواصفات المذكورة. شكراً جزيلاً على المصداقية العالية والدفع عند الاستلام."</p>
+                </div>
+                <div class="glass-card p-6 rounded-3xl border border-gray-800 space-y-3 shadow-lg">
+                    <div class="flex items-center justify-between">
+                        <span class="font-bold text-sm text-white">يوسف من وهران</span>
+                        <span class="text-yellow-400 text-xs">★★★★★</span>
+                    </div>
+                    <p class="text-gray-400 text-xs leading-relaxed">"المنتج راقي جداً والتغليف ممتاز. الطريقة التي تطلب بها عبر الموقع سلسة والأجمل أن التوصيل متوفر لكل الولايات."</p>
+                </div>
+                <div class="glass-card p-6 rounded-3xl border border-gray-800 space-y-3 shadow-lg">
+                    <div class="flex items-center justify-between">
+                        <span class="font-bold text-sm text-white">سارة من الجزائر العاصمة</span>
+                        <span class="text-yellow-400 text-xs">★★★★★</span>
+                    </div>
+                    <p class="text-gray-400 text-xs leading-relaxed">"أفضل متجر تعاملت معه، الجودة ممتازة والخدمة رائعة جداً. أنصح الجميع بالطلب منه."</p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- بوابة تفاصيل المنتج وإتمام الطلب المنبثقة (Modal) -->
+    <div id="productModal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="glass-card max-w-lg w-full p-6 md:p-8 rounded-3xl space-y-6 relative border border-gray-700 shadow-2xl max-h-[90vh] overflow-y-auto fade-in">
+            <div class="flex justify-between items-center border-b border-gray-800 pb-4">
+                <h3 class="text-lg font-bold text-white" id="modalHeaderTitle">تفاصيل المنتج والطلب</h3>
+                <button onclick="closeProductModal()" class="text-gray-400 hover:text-white font-bold text-xl">✕</button>
+            </div>
+
+            <!-- تفاصيل المنتج داخل البوابة -->
+            <div class="space-y-4">
+                <img id="modalImg" src="" alt="" class="w-full h-48 object-cover rounded-2xl border border-gray-800 shadow">
+                <div>
+                    <h4 id="modalProdName" class="text-xl font-black text-white"></h4>
+                    <p id="modalProdPrice" class="text-emerald-400 font-extrabold text-xl mt-1"></p>
+                    <p id="modalProdDesc" class="text-gray-300 text-xs leading-relaxed mt-2 bg-gray-900/60 p-3.5 rounded-xl border border-gray-800/80"></p>
+                </div>
+
+                <!-- استمارة الطلب المتصلة بجدولك -->
+                <form id="orderForm" onsubmit="submitOrder(event)" class="space-y-3 pt-3 border-t border-gray-800">
+                    <h5 id="formTitle" class="text-sm font-bold text-emerald-400">استمارة الدفع عند الاستلام 🚚</h5>
+                    
+                    <div>
+                        <label id="labelName" class="block text-[11px] font-semibold text-gray-400 mb-1">الاسم واللقب</label>
+                        <input type="text" id="clientName" required class="w-full bg-gray-900 border border-gray-800 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500" placeholder="مثال: خالد بن لمبارك">
+                    </div>
+
+                    <div>
+                        <label id="labelPhone" class="block text-[11px] font-semibold text-gray-400 mb-1">رقم الهاتف</label>
+                        <input type="tel" id="clientPhone" required class="w-full bg-gray-900 border border-gray-800 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500" placeholder="06 / 05 / 07 ...">
+                    </div>
+
+                    <div>
+                        <label id="labelState" class="block text-[11px] font-semibold text-gray-400 mb-1">الولاية (58 ولاية)</label>
+                        <select id="clientState" required class="w-full bg-gray-900 border border-gray-800 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500">
+                            <option value="">اختر ولايتك</option>
+                            <option value="الشلف">02 - الشلف</option>
+                            <option value="الجزائر العاصمة">16 - الجزائر العاصمة</option>
+                            <option value="وهران">31 - وهران</option>
+                            <option value="قسنطينة">25 - قسنطينة</option>
+                            <option value="باتنة">05 - باتنة</option>
+                            <option value="بليدة">09 - البليدة</option>
+                            <option value="تيزي وزو">15 - تيزي وزو</option>
+                            <option value="سطيف">19 - سطيف</option>
+                            <option value="البويرة">10 - البويرة</option>
+                            <option value="ولاية أخرى">ولاية أخرى (58 ولاية متوفرة)</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label id="labelAddress" class="block text-[11px] font-semibold text-gray-400 mb-1">العنوان التفصيلي</label>
+                        <input type="text" id="clientAddress" required class="w-full bg-gray-900 border border-gray-800 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500" placeholder="مثال: حي البدر، شارع الاستقلال">
+                    </div>
+
+                    <button type="submit" id="submitBtn" class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold py-3 rounded-xl transition text-sm shadow-lg shadow-emerald-600/30 mt-2">
+                        تأكيد طلب المنتج الآن 🚀
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer class="border-t border-gray-800/80 py-6 text-center text-xs text-gray-500">
+        جميع الحقوق محفوظة © 2026 - متجرك الجزائري العصري E-Shop DZ
+    </footer>
+
+    <script>
+        // رابط السكريبت الجديد والمحدث الخاص بجدول الطلبات الخاص بك
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzL-SDsuu_5qHOy-jvKTW_ZE6dOUjQ8e6KQ5AQBoME6rKdAvD0p78wOqlYyuMgcNRak/exec';
+
+        let currentLang = 'ar';
+
+        const translations = {
+            ar: {
+                brand: "متجري الجزائري DZ",
+                langBtn: "Français",
+                badge: "التوصيل متوفر لجميع ولايات الوطن 58 ولاية 🇩🇿",
+                heroTitle: "تسوق أرقى المنتجات العصرية بضغطة زر",
+                heroDesc: "منصتك الجزائرية الأولى للتسوق الآمن. نوفر لك منتجات أصلية ذات جودة عالية مع ميزة الدفع عند الاستلام وضمان كامل على سرعة التوصيل.",
+                productsHeader: "المنتجات المتوفرة",
+                reviewsHeader: "آراء الزبائن الأفاضل ⭐⭐⭐⭐⭐",
+                modalHeader: "تفاصيل المنتج والطلب",
+                formTitle: "استمارة الدفع عند الاستلام 🚚",
+                labelName: "الاسم واللقب",
+                labelPhone: "رقم الهاتف",
+                labelState: "الولاية (58 ولاية)",
+                labelAddress: "العنوان التفصيلي",
+                submitBtn: "تأكيد طلب المنتج الآن 🚀"
+            },
+            fr: {
+                brand: "E-Shop Algérie DZ",
+                langBtn: "العربية",
+                badge: "Livraison disponible sur les 58 wilayas 🇩🇿",
+                heroTitle: "Achetez les meilleurs produits tendance en un clic",
+                heroDesc: "Votre première plateforme algérienne de shopping sécurisé. Produits originaux de haute qualité avec paiement à la livraison.",
+                productsHeader: "Produits Disponibles",
+                reviewsHeader: "Avis de nos Clients ⭐⭐⭐⭐⭐",
+                modalHeader: "Détails du Produit et Commande",
+                formTitle: "Formulaire de Paiement à la Livraison 🚚",
+                labelName: "Nom et Prénom",
+                labelPhone: "Numéro de Téléphone",
+                labelState: "Wilaya (58 Wilayas)",
+                labelAddress: "Adresse Détaillée",
+                submitBtn: "Confirmer la commande 🚀"
+            }
+        };
+
+        function toggleLang() {
+            currentLang = currentLang === 'ar' ? 'fr' : 'ar';
+            const t = translations[currentLang];
+            document.getElementById('htmlRoot').setAttribute('dir', currentLang === 'ar' ? 'rtl' : 'ltr');
+            document.getElementById('brandName').innerText = t.brand;
+            document.getElementById('langBtnText').innerText = t.langBtn;
+            document.getElementById('badgeText').innerText = t.badge;
+            document.getElementById('heroTitle').innerText = t.heroTitle;
+            document.getElementById('heroDesc').innerText = t.heroDesc;
+            document.getElementById('productsHeader').innerText = t.productsHeader;
+            document.getElementById('reviewsHeader').innerText = t.reviewsHeader;
+            document.getElementById('modalHeaderTitle').innerText = t.modalHeader;
+            document.getElementById('formTitle').innerText = t.formTitle;
+            document.getElementById('labelName').innerText = t.labelName;
+            document.getElementById('labelPhone').innerText = t.labelPhone;
+            document.getElementById('labelState').innerText = t.labelState;
+            document.getElementById('labelAddress').innerText = t.labelAddress;
+            document.getElementById('submitBtn').innerText = t.submitBtn;
+        }
+
+        const modal = document.getElementById('productModal');
+        let selectedProductString = "";
+
+        function openProductModal(name, price, desc, img) {
+            document.getElementById('modalProdName').innerText = name;
+            document.getElementById('modalProdPrice').innerText = price;
+            document.getElementById('modalProdDesc').innerText = desc;
+            document.getElementById('modalImg').src = img;
+            selectedProductString = `${name} (${price})`;
+            modal.classList.remove('hidden');
+        }
+
+        function closeProductModal() {
+            modal.classList.add('hidden');
+        }
+
+        function submitOrder(e) {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            const originalText = btn.innerText;
+            btn.innerText = currentLang === 'ar' ? "جاري تسجيل الطلب..." : "Enregistrement...";
+            btn.disabled = true;
+
+            const orderData = {
+                date: new Date().toLocaleString(),
+                product: selectedProductString,
+                name: document.getElementById('clientName').value,
+                phone: document.getElementById('clientPhone').value,
+                state: document.getElementById('clientState').value,
+                address: document.getElementById('clientAddress').value
+            };
+
+            fetch(scriptURL, {
+                method: 'POST',
+                mode: 'no-cors',
+                body: JSON.stringify(orderData)
+            }).then(() => {
+                alert(currentLang === 'ar' ? "✅ تم إرسال طلبك بنجاح! سنتصل بك قريباً للتأكيد." : "✅ Commande envoyée avec succès! Nous vous contacterons bientôt.");
+                closeProductModal();
+                document.getElementById('orderForm').reset();
+                btn.innerText = originalText;
+                btn.disabled = false;
+            }).catch(() => {
+                alert(currentLang === 'ar' ? "حدث خطأ في الاتصال، يرجى المحاولة مجدداً." : "Erreur de connexion, veuillez réessayer.");
+                btn.innerText = originalText;
+                btn.disabled = false;
+            });
+        }
+    </script>
+</body>
+</html>
