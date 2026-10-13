@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" id="htmlRoot" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>متجري الجزائري العصري | E-Shop DZ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script> tailwind.config = { darkMode: 'class' } </script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Tajawal', sans-serif; }
+        .fade-in { animation: fadeIn 0.4s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between bg-gray-50 dark:bg-[#0b0f19] text-gray-900 dark:text-gray-100 transition-colors duration-300">
+
+    <div class="bg-gradient-to-r from-emerald-600 to-teal-600 text-white text-xs font-bold py-2 px-4 text-center shadow-md">
+        🔥 عروض حصرية: توصيل سريع مع ZR Express لـ 58 ولاية والدفع عند الاستلام! 🇩🇿
+    </div>
+
+    <header class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 shadow-sm">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <span class="text-2xl font-black bg-gradient-to-r from-emerald-500 to-cyan-500 bg-clip-text text-transparent">متجري الجزائري DZ</span>
+            <div class="flex items-center gap-3">
+                <button onclick="toggleTheme()" class="p-2.5 rounded-xl bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:scale-105 transition shadow-sm"><span id="themeIcon">☀️</span></button>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-6 py-10 flex-grow space-y-10">
+        <div class="text-center space-y-4 py-12 px-6 bg-white dark:bg-gray-900/80 rounded-3xl border border-gray-200 dark:border-gray-800 relative overflow-hidden shadow-xl fade-in">
+            <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/80 border border-emerald-500/20 px-4 py-1.5 rounded-full inline-block">شريك التوصيل الرسمي: ZR Express 🚚</span>
+            <h1 class="text-3xl md:text-5xl font-black tracking-tight leading-snug">متجرك الذكي المدار كلياً عبر Google Sheets</h1>
+            <p class="text-gray-600 dark:text-gray-400 text-sm max-w-2xl mx-auto leading-relaxed">أضف منتجك في الجدول وسيقوم النظام بشرحه بالذكاء الاصطناعي وعرضه فوراً لزوارك.</p>
+
+            <div class="max-w-xl mx-auto pt-4">
+                <div class="relative">
+                    <span class="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none text-emerald-500">🤖</span>
+                    <input type="text" id="aiSearchInput" oninput="filterProducts()" class="w-full bg-gray-50 dark:bg-gray-950 border border-gray-300 dark:border-gray-700 rounded-2xl pr-12 pl-4 py-3.5 text-sm focus:outline-none focus:border-emerald-500 shadow-inner transition" placeholder="ابحث بالذكاء الاصطناعي عن أي منتج...">
+                </div>
+            </div>
+        </div>
+
+        <div class="space-y-6">
+            <h2 class="text-2xl font-black">قائمة المنتجات المتوفرة</h2>
+            <div id="productsGrid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- يبدأ المتجر فارغاً تماماً في انتظار جلب المنتجات من الشيت -->
+                <div class="col-span-3 text-center py-16 text-gray-400 dark:text-gray-500 bg-white dark:bg-gray-900/50 rounded-3xl border border-dashed border-gray-300 dark:border-gray-800 animate-pulse">
+                    📭 المتجر فارغ حالياً. أضف منتجاتك في ورقة "اضافة منتجات" لتظهر هنا تلقائياً!
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal الطلب -->
+    <div id="productModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-gray-900 max-w-lg w-full p-6 md:p-8 rounded-3xl space-y-6 relative border border-gray-200 dark:border-gray-800 shadow-2xl max-h-[90vh] overflow-y-auto fade-in">
+            <div class="flex justify-between items-center border-b border-gray-200 dark:border-gray-800 pb-4">
+                <h3 class="text-lg font-bold">تأكيد الطلب عبر ZR Express</h3>
+                <button onclick="closeProductModal()" class="text-gray-400 hover:text-white font-bold text-xl">✕</button>
+            </div>
+            <div class="space-y-4">
+                <img id="modalImg" src="" alt="" class="w-full h-48 object-cover rounded-2xl border border-gray-200 dark:border-gray-800 shadow">
+                <div>
+                    <h4 id="modalProdName" class="text-xl font-black"></h4>
+                    <p id="modalProdPrice" class="text-emerald-500 font-extrabold text-xl mt-1"></p>
+                    <p id="modalProdDesc" class="text-gray-600 dark:text-gray-300 text-xs leading-relaxed mt-2 bg-gray-50 dark:bg-gray-950 p-3 rounded-xl border border-gray-200 dark:border-gray-800"></p>
+                    <p id="modalStock" class="text-xs font-bold text-cyan-500 mt-2">📦 المخزون المتبقي: --</p>
+                </div>
+
+                <form id="orderForm" onsubmit="submitOrder(event)" class="space-y-3 pt-3 border-t border-gray-200 dark:border-gray-800">
+                    <h5 class="text-sm font-bold text-emerald-500">استمارة التوصيل والدفع عند الاستلام 🚚</h5>
+                    <div>
+                        <label class="block text-[11px] font-semibold text-gray-500 mb-1">الاسم واللقب</label>
+                        <input type="text" id="clientName" required class="w-full bg-gray-50 dark:bg-gray-950 border border-gray-300 dark:border-gray-800 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-emerald-500">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-semibold text-gray-500 mb-1">رقم الهاتف</label>
+                        <input type="tel" id="clientPhone" required class="w-full bg-gray-50 dark:bg-gray-950 border border-gray-300 dark:border-gray-800 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-emerald-500">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-semibold text-gray-500 mb-1">الولاية (58 ولاية)</label>
+                        <select id="clientState" required class="w-full bg-gray-50 dark:bg-gray-950 border border-gray-300 dark:border-gray-800 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-emerald-500">
+                            <option value="">اختر ولايتك</option>
+                            <option value="الشلف">02 - الشلف</option>
+                            <option value="الجزائر العاصمة">16 - الجزائر العاصمة</option>
+                            <option value="وهران">31 - وهران</option>
+                            <option value="ولاية أخرى">ولاية أخرى (58 ولاية)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-semibold text-gray-500 mb-1">نوع التوصيل مع ZR Express</label>
+                        <select id="deliveryType" required class="w-full bg-gray-50 dark:bg-gray-950 border border-gray-300 dark:border-gray-800 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-emerald-500">
+                            <option value="ZR Express - مكتب (Bureau)">توصيل إلى مكتب ZR Express (Bureau)</option>
+                            <option value="ZR Express - منزل (Domicile)">توصيل إلى باب المنزل (Domicile)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-semibold text-gray-500 mb-1">العنوان التفصيلي</label>
+                        <input type="text" id="clientAddress" required class="w-full bg-gray-50 dark:bg-gray-950 border border-gray-300 dark:border-gray-800 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-emerald-500">
+                    </div>
+                    <button type="submit" id="submitBtn" class="w-full bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-bold py-3 rounded-xl transition text-sm shadow-lg shadow-emerald-500/20 mt-2">تأكيد طلب المنتج الآن 🚀</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer class="border-t border-gray-200 dark:border-gray-800 py-6 text-center text-xs text-gray-500">جميع الحقوق محفوظة © 2026 - متجر رقمي ذكي مرتبط بـ Google Sheets</footer>
+
+    <script>
+        const scriptURL = 'ضع_رابط_الـ_Web_App_الجديد_هنا';
+        let allProducts = [];
+
+        async function fetchProductsFromSheet() {
+            try {
+                const response = await fetch(scriptURL);
+                allProducts = await response.json();
+                renderProducts(allProducts);
+            } catch (error) {
+                document.getElementById('productsGrid').innerHTML = `<div class="col-span-3 text-center text-red-500">تعذر جلب المنتجات.</div>`;
+            }
+        }
+
+        function renderProducts(items) {
+            const grid = document.getElementById('productsGrid');
+            grid.innerHTML = '';
+            if (!items || items.length === 0) {
+                grid.innerHTML = `<div class="col-span-3 text-center py-16 text-gray-400 dark:text-gray-500 bg-white dark:bg-gray-900/50 rounded-3xl border border-dashed border-gray-300 dark:border-gray-800">📭 المتجر فارغ حالياً. أضف منتجاتك في ورقة "اضافة منتجات" لتظهر هنا تلقائياً!</div>`;
+                return;
+            }
+            items.forEach(prod => {
+                const isOutOfStock = prod.stock <= 0;
+                grid.innerHTML += `
+                    <div class="bg-white dark:bg-gray-900 rounded-3xl overflow-hidden border border-gray-200 dark:border-gray-800 p-5 flex flex-col justify-between space-y-4 shadow-xl fade-in">
+                        <div class="h-56 bg-gray-100 dark:bg-gray-950 rounded-2xl overflow-hidden relative group">
+                            <img src="${prod.image}" alt="${prod.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                            <span class="absolute top-3 right-3 text-[10px] bg-emerald-600 text-white px-2.5 py-1 rounded-full font-bold shadow">متوفر: ${prod.stock} 📦</span>
+                        </div>
+                        <div class="space-y-2">
+                            <h3 class="text-lg font-bold">${prod.name}</h3>
+                            <p class="text-emerald-500 font-extrabold text-lg">${prod.price}</p>
+                            <p class="text-gray-600 dark:text-gray-400 text-xs leading-relaxed">${prod.desc}</p>
+                        </div>
+                        <button ${isOutOfStock ? 'disabled' : `onclick="openProductModal('${prod.name}', '${prod.price}', '${prod.desc.replace(/'/g, "\\'")}', '${prod.image}',${prod.stock})"`} class="w-full ${isOutOfStock ? 'bg-gray-400 cursor-not-allowed' : 'bg-gradient-to-r from-emerald-500 to-teal-500 hover:opacity-90'} text-white font-bold py-3 rounded-xl transition text-sm shadow-lg shadow-emerald-500/20">
+                            ${isOutOfStock ? 'نفذ المخزون' : 'اطلب الآن مع ZR Express 🛍️'}
+                        </button>
+                    </div>
+                `;
+            });
+        }
+
+        function filterProducts() {
+            const query = document.getElementById('aiSearchInput').value.toLowerCase();
+            const filtered = allProducts.filter(p => p.name.toLowerCase().includes(query) || p.desc.toLowerCase().includes(query));
+            renderProducts(filtered);
+        }
+
+        fetchProductsFromSheet();
+
+        const modal = document.getElementById('productModal');
+        let selectedProductString = "";
+
+        function openProductModal(name, price, desc, img, stock) {
+            document.getElementById('modalProdName').innerText = name;
+            document.getElementById('modalProdPrice').innerText = price;
+            document.getElementById('modalProdDesc').innerText = desc;
+            document.getElementById('modalImg').src = img;
+            document.getElementById('modalStock').innerText = `📦 المخزون المتبقي: ${stock} قطعة`;
+            selectedProductString = `${name} (${price})`;
+            modal.classList.remove('hidden');
+        }
+
+        function closeProductModal() { modal.classList.add('hidden'); }
+
+        function toggleTheme() {
+            const html = document.getElementById('htmlRoot');
+            const icon = document.getElementById('themeIcon');
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                icon.innerText = "🌙";
+            } else {
+                html.classList.add('dark');
+                icon.innerText = "☀️";
+            }
+        }
+
+        function submitOrder(e) {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            btn.innerText = "جاري إرسال الطلب لـ ZR Express...";
+            btn.disabled = true;
+
+            const orderData = {
+                date: new Date().toLocaleString(),
+                product: selectedProductString,
+                name: document.getElementById('clientName').value,
+                phone: document.getElementById('clientPhone').value,
+                state: document.getElementById('clientState').value,
+                delivery: document.getElementById('deliveryType').value,
+                address: document.getElementById('clientAddress').value
+            };
+
+            fetch(scriptURL, {
+                method: 'POST',
+                mode: 'no-cors',
+                body: JSON.stringify(orderData)
+            }).then(() => {
+                alert("✅ تم تسجيل الطلب وتوصيل ZR Express بنجاح!");
+                closeProductModal();
+                document.getElementById('orderForm').reset();
+                btn.innerText = "تأكيد طلب المنتج الآن 🚀";
+                btn.disabled = false;
+            }).catch(() => {
+                alert("حدث خطأ في الاتصال.");
+                btn.innerText = "تأكيد طلب المنتج الآن 🚀";
+                btn.disabled = false;
+            });
+        }
+    </script>
+</body>
+</html>
