@@ -27,7 +27,7 @@
     <!-- الناب بار -->
     <header class="sticky top-0 z-45 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 shadow-sm">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <span id="storeBrand" class="text-2xl font-black bg-gradient-to-r from-amber-500 to-emerald-500 bg-clip-text text-transparent cursor-pointer" onclick="goHome()">سوق DZ 🛒</span>
+            <span id="storeBrand" class="text-2xl font-black bg-gradient-to-r from-amber-500 to-emerald-500 bg-clip-text text-transparent">سوق DZ 🛒</span>
             <div class="flex items-center gap-3">
                 <button onclick="toggleCartDrawer()" class="relative p-2.5 rounded-xl bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:scale-105 transition shadow-sm flex items-center gap-1.5 font-bold text-xs">
                     <span id="cartBtnText">🛒 سلتك</span> <span id="cartBadge" class="bg-emerald-500 text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-bold">0</span>
@@ -37,7 +37,7 @@
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-6 py-8 flex-grow space-y-12">
+    <main class="max-w-7xl mx-auto px-6 py-8 flex-grow space-y-10">
         
         <!-- واجهة المقدمة -->
         <div class="text-center space-y-6 py-12 px-6 bg-gradient-to-b from-white to-amber-50/50 dark:from-gray-900 dark:to-gray-950 rounded-3xl border border-amber-500/20 shadow-2xl fade-in">
@@ -48,31 +48,32 @@
                 <span id="aiBadge" class="text-xs font-bold text-amber-600 dark:text-amber-400 bg-amber-100 dark:bg-amber-950/80 border border-amber-500/30 px-4 py-1.5 rounded-full inline-block">مساعد السوق الذكي 💬</span>
                 <h1 id="heroTitle" class="text-2xl md:text-4xl font-black tracking-tight">"أهلا بيك يا خويا، راك فالسوق الأضمن والأسرع!"</h1>
                 <p id="heroDesc" class="text-gray-600 dark:text-gray-400 text-sm max-w-xl mx-auto leading-relaxed">
-                    اختر الصنف الذي تحتاجه من الأسفل لتتصفح المنتجات المتوفرة بكل سهولة!
+                    أنا المساعد الذكي تاعك هنا. اضغط على أي منتج باش تشوف التعريف والكمية المتبقية بدقة!
                 </p>
+            </div>
+
+            <div class="pt-4">
+                <a href="#marketSection" id="shopNowBtn" onclick="scrollToMarket()" class="inline-block bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-base font-black px-8 py-4 rounded-2xl shadow-xl shadow-emerald-600/30 transition transform hover:scale-105">
+                    ✨ تسوق الآن يا خويا
+                </a>
             </div>
         </div>
 
-        <!-- واجهة الأصناف الرئيسية -->
-        <div id="categoriesSection" class="space-y-6">
-            <h2 id="categoriesTitle" class="text-2xl font-black flex items-center gap-2">📂 أصناف الحانوت</h2>
-            <div id="categoriesGrid" class="grid grid-cols-2 md:grid-cols-4 gap-6"></div>
-        </div>
-
-        <!-- قسم المنتجات -->
-        <div id="marketSection" class="space-y-6 pt-6 hidden">
+        <!-- قسم السوق والمنتجات مباشرة -->
+        <div id="marketSection" class="space-y-6 pt-6">
             <div class="flex flex-col md:flex-row justify-between items-center gap-4 bg-white dark:bg-gray-900 p-6 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-sm">
-                <div class="flex items-center gap-3">
-                    <button onclick="goHome()" class="bg-gray-100 dark:bg-gray-800 px-4 py-2 rounded-xl text-xs font-bold hover:bg-amber-500 hover:text-white transition">← العودة للأصناف</button>
-                    <h2 id="currentCategoryTitle" class="text-xl font-black text-amber-500">🛍️ المنتجات</h2>
-                </div>
+                <h2 id="marketTitle" class="text-2xl font-black flex items-center gap-2">🛍️ حانوت السلع والعروض</h2>
                 <div class="w-full md:w-80 relative">
                     <span class="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none text-emerald-500">🔍</span>
                     <input type="text" id="aiSearchInput" oninput="filterProducts()" class="w-full bg-gray-50 dark:bg-gray-950 border border-gray-300 dark:border-gray-700 rounded-xl pr-12 pl-4 py-2.5 text-xs focus:outline-none focus:border-emerald-500 shadow-inner transition" placeholder="ابحث عن أي سلعة...">
                 </div>
             </div>
 
-            <div id="productsGrid" class="grid grid-cols-1 md:grid-cols-3 gap-8"></div>
+            <div id="productsGrid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div id="loadingText" class="col-span-3 text-center py-16 text-gray-400 dark:text-gray-500 bg-white dark:bg-gray-900/50 rounded-3xl border border-dashed border-gray-300 dark:border-gray-800 animate-pulse">
+                    📭 جاري جلب السلع من الحانوت...
+                </div>
+            </div>
         </div>
 
         <!-- قسم التعريف والتقييمات -->
@@ -98,7 +99,7 @@
         </div>
     </main>
 
-    <!-- الفوتر -->
+    <!-- الفوتر مع روابط السوشيال ميديا المدارة يدوياً -->
     <footer class="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 py-8 px-6 mt-12">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
             <span id="footerBrandText" class="text-xs text-gray-500 font-bold">سوق DZ الحر © 2026 - جميع الحقوق محفوظة</span>
@@ -146,7 +147,7 @@
             </div>
 
             <div class="space-y-4">
-                <h4 class="text-sm font-bold text-amber-500">🛍️ تعديل أصناف، أسعار ووصف المنتجات:</h4>
+                <h4 class="text-sm font-bold text-amber-500">🛍️ تعديل أسعار وترتيب ووصف المنتجات:</h4>
                 <div id="adminProductsList" class="space-y-4 max-h-[40vh] overflow-y-auto pr-2"></div>
                 <button onclick="saveAdminChanges()" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 rounded-xl transition text-sm shadow-lg">حفظ كل إعدادات وتعديلات المتجر 💾</button>
             </div>
@@ -171,7 +172,6 @@
                 
                 <div class="bg-amber-50 dark:bg-amber-950/30 border border-amber-500/20 p-4 rounded-2xl space-y-2">
                     <span id="modalAiDescTitle" class="text-xs font-bold text-amber-600 dark:text-amber-400 flex items-center gap-1">✨ تعريف المنتج:</span>
-                    <!-- تم فصل الوصف هنا ليعرض النص الصحيح لتعريف المنتج دائماً -->
                     <p id="modalProductDesc" class="text-gray-700 dark:text-gray-300 text-xs leading-relaxed"></p>
                 </div>
             </div>
@@ -262,13 +262,11 @@
     <script>
         const scriptURL = 'https://script.google.com/macros/s/AKfycby3zu9qNGCduyqLzEZ6Z0hjRG39s266vOb-K5ARPbBYahbWj9YMX9te8UEDolhinoDI/exec';
         let allProducts = [];
-        let categories = [];
         let cart = [];
         let shippingRates = {};
         let currentModalProductIndex = null;
         let modalQty = 1;
         let currentLang = 'ar';
-        let selectedCategory = null;
 
         let storeSettings = {
             fb: "https://facebook.com",
@@ -287,11 +285,13 @@
                 cartBtnText: "🛒 سلتك",
                 aiBadge: "مساعد السوق الذكي 💬",
                 heroTitle: "\"أهلا بيك يا خويا، راك فالسوق الأضمن والأسرع!\"",
-                heroDesc: "اختر الصنف الذي تحتاجه من الأسفل لتتصفح المنتجات المتوفرة بكل سهولة!",
-                categoriesTitle: "📂 أصناف الحانوت",
+                heroDesc: "أنا المساعد الذكي تاعك هنا. اضغط على أي منتج باش تشوف التعريف والكمية المتبقية بدقة!",
+                shopNowBtn: "✨ تسوق الآن يا خويا",
+                marketTitle: "🛍️ حانوت السلع والعروض",
+                searchInputPlaceholder: "ابحث عن أي سلعة...",
+                loadingText: "📭 جاري جلب السلع من الحانوت...",
                 aboutStoreTitle: "ℹ️ تعريف المتجر",
                 reviewsTitle: "⭐ آراء وتقييمات الزبائن",
-                searchInputPlaceholder: "ابحث عن أي سلعة...",
                 modalAiDescTitle: "✨ تعريف المنتج:",
                 modalQtyLabel: "اختر الكمية:",
                 modalAddToCartBtn: "أضف للسلة يا خويا 🛒",
@@ -329,11 +329,12 @@
                 cartBtnText: "🛒 Panier",
                 aiBadge: "Assistant IA 💬",
                 heroTitle: "\"Bienvenue cher ami, le marché le plus sûr et rapide!\"",
-                heroDesc: "Choisissez la catégorie souhaitée ci-dessous pour explorer les produits disponibles !",
-                categoriesTitle: "📂 Catégories de la Boutique",
+                heroDesc: "Je suis votre assistant intelligent. Cliquez sur un produit pour voir sa description et son stock exact !",
+                shopNowBtn: "✨ Acheter maintenant",
+                marketTitle: "🛍️ Catalogue des Produits",
+                searchInputPlaceholder: "Rechercher un produit...",
                 aboutStoreTitle: "ℹ️ À propos du magasin",
                 reviewsTitle: "⭐ Avis et Évaluations",
-                searchInputPlaceholder: "Rechercher un produit...",
                 modalAiDescTitle: "✨ Description du produit :",
                 modalQtyLabel: "Quantité :",
                 modalAddToCartBtn: "Ajouter au panier 🛒",
@@ -371,10 +372,7 @@
             htmlRoot.setAttribute('dir', currentLang === 'ar' ? 'rtl' : 'ltr');
             htmlRoot.setAttribute('lang', currentLang);
             updateStaticTexts();
-            renderCategories();
-            if (selectedCategory) {
-                renderProducts(getFilteredProductsByCategory(selectedCategory));
-            }
+            renderProducts(allProducts);
             renderCartItems();
         }
 
@@ -388,10 +386,12 @@
             document.getElementById('aiBadge').innerText = t.aiBadge;
             document.getElementById('heroTitle').innerText = t.heroTitle;
             document.getElementById('heroDesc').innerText = t.heroDesc;
-            document.getElementById('categoriesTitle').innerText = t.categoriesTitle;
+            document.getElementById('shopNowBtn').innerText = t.shopNowBtn;
+            document.getElementById('marketTitle').innerText = t.marketTitle;
+            document.getElementById('aiSearchInput').placeholder = t.searchInputPlaceholder;
+            document.getElementById('loadingText').innerText = t.loadingText;
             document.getElementById('aboutStoreTitle').innerText = t.aboutStoreTitle;
             document.getElementById('reviewsTitle').innerText = t.reviewsTitle;
-            document.getElementById('aiSearchInput').placeholder = t.searchInputPlaceholder;
             document.getElementById('modalAiDescTitle').innerText = t.modalAiDescTitle;
             document.getElementById('modalQtyLabel').innerText = t.modalQtyLabel;
             document.getElementById('modalAddToCartBtn').innerText = t.modalAddToCartBtn;
@@ -420,12 +420,7 @@
                 const response = await fetch(scriptURL);
                 const data = await response.json();
                 if (data.products) {
-                    allProducts = data.products.map((p, idx) => ({ 
-                        ...p, 
-                        uiQty: 1, 
-                        sortOrder: idx + 1,
-                        category: p.category || "عام (General)" 
-                    }));
+                    allProducts = data.products.map((p, idx) => ({ ...p, uiQty: 1, sortOrder: idx + 1 }));
                 }
                 if (data.shipping) shippingRates = data.shipping;
                 
@@ -441,7 +436,6 @@
                                 if (savedItem.price !== undefined) prod.price = savedItem.price;
                                 if (savedItem.desc !== undefined) prod.desc = savedItem.desc;
                                 if (savedItem.sortOrder !== undefined) prod.sortOrder = savedItem.sortOrder;
-                                if (savedItem.category !== undefined) prod.category = savedItem.category;
                             }
                         });
                     }
@@ -451,18 +445,15 @@
                 }
                 
                 allProducts.sort((a, b) => a.sortOrder - b.sortOrder);
-                extractCategories();
                 applyStoreSettings();
-                renderCategories();
+                renderProducts(allProducts);
             } catch (error) {
-                console.log("خطأ في جلب البيانات.");
+                document.getElementById('productsGrid').innerHTML = `<div class="col-span-3 text-center text-red-500">مشكل في الاتصال بالسيرفر.</div>`;
             }
         }
 
-        function extractCategories() {
-            const catSet = new Set();
-            allProducts.forEach(p => catSet.add(p.category));
-            categories = Array.from(catSet);
+        function scrollToMarket() {
+            document.getElementById('marketSection').scrollIntoView({ behavior: 'smooth' });
         }
 
         function applyStoreSettings() {
@@ -473,56 +464,13 @@
             document.getElementById('socialWa').href = storeSettings.wa;
         }
 
-        function renderCategories() {
-            const grid = document.getElementById('categoriesGrid');
-            grid.innerHTML = '';
-            if (categories.length === 0) {
-                grid.innerHTML = `<div class="col-span-4 text-center py-8 text-gray-400">لا توجد أصناف مضافة حالياً.</div>`;
-                return;
+        function populateStatesDropdown() {
+            const select = document.getElementById('cartStateSelect');
+            select.innerHTML = '';
+            for (const state in shippingRates) {
+                select.innerHTML += `<option value="${state}">${state}</option>`;
             }
-
-            const aiCategoryImages = [
-                "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=500",
-                "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500",
-                "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500",
-                "https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=500"
-            ];
-
-            categories.forEach((cat, idx) => {
-                const img = aiCategoryImages[idx % aiCategoryImages.length];
-                grid.innerHTML += `
-                    <div onclick="selectCategory('${cat}')" class="bg-white dark:bg-gray-900 rounded-3xl overflow-hidden border border-gray-200 dark:border-gray-800 shadow-xl cursor-pointer group hover:scale-105 transition duration-300 flex flex-col justify-between">
-                        <div class="h-36 overflow-hidden relative">
-                            <img src="${img}" alt="${cat}" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
-                            <span class="absolute bottom-3 right-3 text-white font-black text-sm drop-shadow">${cat}</span>
-                        </div>
-                        <div class="p-3 text-center">
-                            <span class="text-xs text-emerald-500 font-bold">تصفح المنتجات ➔</span>
-                        </div>
-                    </div>
-                `;
-            });
-        }
-
-        function selectCategory(catName) {
-            selectedCategory = catName;
-            document.getElementById('categoriesSection').classList.add('hidden');
-            document.getElementById('marketSection').classList.remove('hidden');
-            document.getElementById('currentCategoryTitle').innerText = "🛍️ صنف: " + catName;
-            const items = getFilteredProductsByCategory(catName);
-            renderProducts(items);
-        }
-
-        function goHome() {
-            selectedCategory = null;
-            document.getElementById('marketSection').classList.add('hidden');
-            document.getElementById('categoriesSection').classList.remove('hidden');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function getFilteredProductsByCategory(cat) {
-            return allProducts.filter(p => p.category === cat);
+            updateCartTotals();
         }
 
         function renderProducts(items) {
@@ -530,11 +478,10 @@
             grid.innerHTML = '';
             const t = translations[currentLang];
             if (!items || items.length === 0) {
-                grid.innerHTML = `<div class="col-span-3 text-center py-16 text-gray-400">📭 لا توجد سلع في هذا الصنف حالياً.</div>`;
+                grid.innerHTML = `<div class="col-span-3 text-center py-16 text-gray-400 dark:text-gray-500 bg-white dark:bg-gray-900/50 rounded-3xl border border-dashed border-gray-300 dark:border-gray-800">${t.loadingText}</div>`;
                 return;
             }
             items.forEach((prod, index) => {
-                const realIndex = allProducts.findIndex(p => p.name === prod.name);
                 const isOutOfStock = prod.stock <= 0;
                 const isLowStock = prod.stock > 0 && prod.stock <= 3;
                 
@@ -546,17 +493,17 @@
 
                 grid.innerHTML += `
                     <div class="bg-white dark:bg-gray-900 rounded-3xl overflow-hidden border border-gray-200 dark:border-gray-800 p-5 flex flex-col justify-between space-y-4 shadow-xl fade-in">
-                        <div onclick="openProductModal(${realIndex})" class="h-56 bg-gray-100 dark:bg-gray-950 rounded-2xl overflow-hidden relative group cursor-pointer">
+                        <div onclick="openProductModal(${index})" class="h-56 bg-gray-100 dark:bg-gray-950 rounded-2xl overflow-hidden relative group cursor-pointer">
                             <img src="${prod.image}" alt="${prod.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
                             ${stockBadgeHTML}
                             <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white font-bold text-xs">${t.cardDetailHint}</div>
                         </div>
                         <div class="space-y-2">
-                            <h3 onclick="openProductModal(${realIndex})" class="text-lg font-bold cursor-pointer hover:text-emerald-500 transition">${prod.name}</h3>
+                            <h3 onclick="openProductModal(${index})" class="text-lg font-bold cursor-pointer hover:text-emerald-500 transition">${prod.name}</h3>
                             <p class="text-emerald-500 font-extrabold text-lg">${prod.price} دج</p>
                             <p class="text-gray-600 dark:text-gray-400 text-xs leading-relaxed line-clamp-2">${prod.desc}</p>
                         </div>
-                        <button ${isOutOfStock ? 'disabled' : `onclick="addToCartDirect(${realIndex}, 1)"`} class="w-full ${isOutOfStock ? 'bg-gray-400 cursor-not-allowed' : 'bg-gradient-to-r from-amber-500 to-emerald-600 hover:opacity-90'} text-white font-bold py-3 rounded-xl transition text-sm shadow-lg shadow-amber-500/25">
+                        <button ${isOutOfStock ? 'disabled' : `onclick="addToCartDirect(${index}, 1)"`} class="w-full ${isOutOfStock ? 'bg-gray-400 cursor-not-allowed' : 'bg-gradient-to-r from-amber-500 to-emerald-600 hover:opacity-90'} text-white font-bold py-3 rounded-xl transition text-sm shadow-lg shadow-amber-500/25">
                             ${isOutOfStock ? t.outOfStock : t.addToCartBtn}
                         </button>
                     </div>
@@ -584,7 +531,6 @@
             }
 
             document.getElementById('modalProductPrice').innerText = prod.price + " دج";
-            // هنا تم التأكد من جلب وصف المنتج بدقة تامة بعيداً عن حالة المخزون
             document.getElementById('modalProductDesc').innerText = prod.desc || "متوفر الآن بأفضل جودة وسعر في السوق.";
             document.getElementById('modalQtyVal').innerText = modalQty;
             
@@ -634,11 +580,8 @@
 
         function filterProducts() {
             const query = document.getElementById('aiSearchInput').value.toLowerCase();
-            if (selectedCategory) {
-                const baseList = getFilteredProductsByCategory(selectedCategory);
-                const filtered = baseList.filter(p => p.name.toLowerCase().includes(query) || p.desc.toLowerCase().includes(query));
-                renderProducts(filtered);
-            }
+            const filtered = allProducts.filter(p => p.name.toLowerCase().includes(query) || p.desc.toLowerCase().includes(query));
+            renderProducts(filtered);
         }
 
         fetchStoreData();
@@ -754,16 +697,12 @@
                                 <input type="number" data-sort-name="${p.name}" value="${p.sortOrder !== undefined ? p.sortOrder : idx + 1}" class="admin-sort-input bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg px-2 py-1 w-16 text-center text-xs">
                             </div>
                         </div>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
-                            <div>
-                                <label class="block text-[10px] text-gray-400 mb-1">الصنف (Category):</label>
-                                <input type="text" data-cat-name="${p.name}" value="${p.category}" class="admin-cat-input w-full bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg px-2 py-1.5 text-xs">
-                            </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
                             <div>
                                 <label class="block text-[10px] text-gray-400 mb-1">السعر (دج):</label>
                                 <input type="number" data-prod-name="${p.name}" value="${p.price}" class="admin-price-input w-full bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg px-2 py-1.5 text-xs text-center">
                             </div>
-                            <div class="md:col-span-3">
+                            <div class="md:col-span-2">
                                 <label class="block text-[10px] text-gray-400 mb-1">الوصف والتعريف:</label>
                                 <textarea data-desc-name="${p.name}" rows="2" class="admin-desc-input w-full bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 rounded-lg px-2 py-1 text-xs">${p.desc}</textarea>
                             </div>
@@ -788,7 +727,6 @@
             const priceInputs = document.querySelectorAll('.admin-price-input');
             const descInputs = document.querySelectorAll('.admin-desc-input');
             const sortInputs = document.querySelectorAll('.admin-sort-input');
-            const catInputs = document.querySelectorAll('.admin-cat-input');
             
             const savedItems = [];
 
@@ -797,25 +735,22 @@
                 const newPrice = Number(input.value) || 0;
                 const newDesc = descInputs[i].value;
                 const newSort = Number(sortInputs[i].value) || (i + 1);
-                const newCat = catInputs[i].value.trim() || "عام";
 
                 const prod = allProducts.find(p => p.name === name);
                 if (prod) {
                     prod.price = newPrice;
                     prod.desc = newDesc;
                     prod.sortOrder = newSort;
-                    prod.category = newCat;
                 }
 
-                savedItems.push({ name: name, price: newPrice, desc: newDesc, sortOrder: newSort, category: newCat });
+                savedItems.push({ name: name, price: newPrice, desc: newDesc, sortOrder: newSort });
             });
 
             localStorage.setItem('admin_store_edits', JSON.stringify({ items: savedItems, settings: storeSettings }));
             
             allProducts.sort((a, b) => a.sortOrder - b.sortOrder);
-            extractCategories();
             applyStoreSettings();
-            renderCategories();
+            renderProducts(allProducts);
 
             alert(currentLang === 'ar' ? "✅ تم حفظ التعديلات وإعدادات المتجر بنجاح يا خويا!" : "✅ Modifications et paramètres enregistrés !");
             closeAdminPanel();
